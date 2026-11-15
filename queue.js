@@ -20,6 +20,7 @@ export const DEFAULT_SETTINGS = Object.freeze({
   maxReviews: 0,          // 0 = no cap
   typing: false,
   autoplay: true,
+  sounds: true,
   voice: '',
   rate: 0.9,
 });

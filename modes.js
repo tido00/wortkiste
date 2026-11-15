@@ -165,19 +165,22 @@ export async function copyText(text) {
 
 function header(ctx, title, onClose) {
   return h('div', { class: 'topbar' },
-    h('button', { class: 'icon-btn', 'aria-label': 'Close', onclick: onClose || (() => ctx.go('today')) }, '✕'),
+    h('button', { class: 'icon-btn', 'aria-label': 'Close', onclick: onClose || (() => ctx.go('more')) }, '✕'),
     h('h2', { style: 'margin:0', class: 'grow' }, title));
 }
 
 // ---------- Daily quiz ----------
-export function buildQuiz(ctx, now = Date.now(), rand = Math.random) {
+export function buildQuiz(ctx, now = Date.now(), rand = Math.random, { size = 10, prefer = new Set() } = {}) {
   const since = now - 14 * 86400000;
   const recent = new Set();
   for (const [id, st] of seenCards(ctx)) if (st.lastReview >= since || isLeech(st)) recent.add(id.split(':')[0]);
   let pool = [...recent].map((id) => ctx.noteById.get(id)).filter(Boolean);
   if (pool.length < 6) pool = [...new Set(seenCards(ctx).map(([id]) => id.split(':')[0]))].map((id) => ctx.noteById.get(id)).filter(Boolean);
   const all = ctx.notes;
-  const byType = (t) => shuffle(pool.filter((n) => t.includes(n.type)), rand);
+  const byType = (t) => {
+    const list = shuffle(pool.filter((n) => t.includes(n.type)), rand);
+    return list.filter((n) => prefer.has(n.id)).concat(list.filter((n) => !prefer.has(n.id)));
+  };
   const pools = {
     article: byType(['n']).filter((n) => !isPluralOnly(n) && article(n.german)),
     cloze: byType(['c']),
@@ -186,7 +189,7 @@ export function buildQuiz(ctx, now = Date.now(), rand = Math.random) {
   };
   const items = [];
   const formats = shuffle(Object.keys(pools), rand);
-  for (let guard = 0; items.length < 10 && guard < 60; guard++) {
+  for (let guard = 0; items.length < size && guard < 60; guard++) {
     const f = formats[guard % formats.length];
     const note = pools[f].shift();
     if (!note) continue;
@@ -220,6 +223,52 @@ export function quizHistory(ctx, now = Date.now()) {
   return (ctx.store.get('quiz', []) || []).filter((q) => q.day > today - 14).sort((a, b) => a.day - b.day);
 }
 
+// One quiz question rendered into `card`. Calls onAnswer(ok) once.
+export function quizItem(card, ctx, it, onAnswer) {
+  audio.stop();
+  const n = it.note;
+  const advance = onAnswer;
+  if (it.format === 'article') {
+    card.append(h('div', { class: 'prompt' }, 'Which article?'), n.keys.img ? h('div', { class: 'emoji' }, n.keys.img) : null,
+      h('div', { class: 'de' }, '___ ', stripArticle(n.german)), h('div', { class: 'fr' }, n.english));
+    const right = article(n.german);
+    const btns = ['der', 'die', 'das'].map((a) => h('button', { class: `abtn ${a}`, onclick: () => {
+      btns.forEach((b) => { b.disabled = true; });
+      btns.find((b) => b.textContent === right).classList.add('right');
+      const ok = a === right;
+      card.append(h('p', { class: ok ? 'result-ok' : 'result-bad' }, ok ? 'Richtig!' : 'Not quite:'), h('div', { class: 'de md' }, deWord(n.german)));
+      if (ctx.hasVoice) audio.speak(n.german);
+      advance(ok);
+    } }, a));
+    card.append(h('div', { class: 'grid3', style: 'margin-top:12px' }, btns));
+  } else if (it.format === 'cloze' || it.format === 'listen') {
+    if (it.format === 'cloze') {
+      const cl = parseCloze(n.german);
+      card.append(h('div', { class: 'prompt' }, 'Fill the gap'), h('div', { class: 'de md' }, cl.parts.map((p) => (p.gap !== undefined ? h('span', { class: 'gap' }, ' ') : p.text))),
+        n.keys.hint ? h('div', { class: 'fr' }, `Hint: ${n.keys.hint}`) : null, h('div', { class: 'fr' }, n.english));
+    } else {
+      card.append(h('div', { class: 'prompt' }, 'Listen. What does it mean?'), h('div', { class: 'row', style: 'justify-content:center' }, audioBtn(ctx, n.german), audioBtn(ctx, n.german, { slow: true, label: '🐢' })));
+      setTimeout(() => audio.speak(n.german), 50);
+    }
+    const choiceBtns = it.choices.map((c) => h('button', { class: 'choice', onclick: () => {
+      choiceBtns.forEach((b) => { b.disabled = true; if (b.textContent === it.answer) b.classList.add('right'); });
+      const ok = c === it.answer;
+      if (!ok) choiceBtns.find((b) => b.textContent === c).classList.add('wrong');
+      if (it.format === 'listen') card.append(h('div', { class: 'de md', style: 'margin-top:10px' }, deWord(n.german)));
+      else if (ctx.hasVoice) audio.speak(parseCloze(n.german).full);
+      advance(ok);
+    } }, c));
+    card.append(h('div', { class: 'choices' }, choiceBtns));
+  } else if (it.format === 'order') {
+    card.append(h('div', { class: 'prompt' }, 'Put the words in order'), h('div', { class: 'en' }, n.english));
+    card.append(orderPuzzle(n, (ok) => {
+      card.append(h('p', { class: ok ? 'result-ok' : 'result-bad' }, ok ? 'Richtig!' : 'Correct order:'), h('div', { class: 'de md' }, orderTiles(n.german).join(' ')));
+      if (ctx.hasVoice) audio.speak(n.german);
+      advance(ok);
+    }));
+  }
+}
+
 export function renderQuiz(root, ctx) {
   const items = buildQuiz(ctx);
   let i = 0, score = 0;
@@ -242,50 +291,10 @@ export function renderQuiz(root, ctx) {
     body.append(h('button', { class: 'btn primary block', style: 'margin-top:16px', onclick: next }, i >= items.length ? 'See score' : 'Next'));
   };
   function showItem(it) {
-    audio.stop();
     body.replaceChildren();
-    const n = it.note;
     const card = h('div', { class: 'card front' });
     body.append(card);
-    if (it.format === 'article') {
-      card.append(h('div', { class: 'prompt' }, 'Which article?'), n.keys.img ? h('div', { class: 'emoji' }, n.keys.img) : null,
-        h('div', { class: 'de' }, '___ ', stripArticle(n.german)), h('div', { class: 'fr' }, n.english));
-      const right = article(n.german);
-      const btns = ['der', 'die', 'das'].map((a) => h('button', { class: `abtn ${a}`, onclick: () => {
-        btns.forEach((b) => { b.disabled = true; });
-        btns.find((b) => b.textContent === right).classList.add('right');
-        const ok = a === right;
-        card.append(h('p', { class: ok ? 'result-ok' : 'result-bad' }, ok ? 'Richtig!' : 'Not quite:'), h('div', { class: 'de md' }, deWord(n.german)));
-        if (ctx.hasVoice) audio.speak(n.german);
-        advance(ok);
-      } }, a));
-      card.append(h('div', { class: 'grid3', style: 'margin-top:12px' }, btns));
-    } else if (it.format === 'cloze' || it.format === 'listen') {
-      if (it.format === 'cloze') {
-        const cl = parseCloze(n.german);
-        card.append(h('div', { class: 'prompt' }, 'Fill the gap'), h('div', { class: 'de md' }, cl.parts.map((p) => (p.gap !== undefined ? h('span', { class: 'gap' }, ' ') : p.text))),
-          n.keys.hint ? h('div', { class: 'fr' }, `Hint: ${n.keys.hint}`) : null, h('div', { class: 'fr' }, n.english));
-      } else {
-        card.append(h('div', { class: 'prompt' }, 'Listen. What does it mean?'), h('div', { class: 'row', style: 'justify-content:center' }, audioBtn(ctx, n.german), audioBtn(ctx, n.german, { slow: true, label: '🐢' })));
-        setTimeout(() => audio.speak(n.german), 50);
-      }
-      const choiceBtns = it.choices.map((c) => h('button', { class: 'choice', onclick: () => {
-        choiceBtns.forEach((b) => { b.disabled = true; if (b.textContent === it.answer) b.classList.add('right'); });
-        const ok = c === it.answer;
-        if (!ok) choiceBtns.find((b) => b.textContent === c).classList.add('wrong');
-        if (it.format === 'listen') card.append(h('div', { class: 'de md', style: 'margin-top:10px' }, deWord(n.german)));
-        else if (ctx.hasVoice) audio.speak(parseCloze(n.german).full);
-        advance(ok);
-      } }, c));
-      card.append(h('div', { class: 'choices' }, choiceBtns));
-    } else if (it.format === 'order') {
-      card.append(h('div', { class: 'prompt' }, 'Put the words in order'), h('div', { class: 'en' }, n.english));
-      card.append(orderPuzzle(n, (ok) => {
-        card.append(h('p', { class: ok ? 'result-ok' : 'result-bad' }, ok ? 'Richtig!' : 'Correct order:'), h('div', { class: 'de md' }, orderTiles(n.german).join(' ')));
-        if (ctx.hasVoice) audio.speak(n.german);
-        advance(ok);
-      }));
-    }
+    quizItem(card, ctx, it, advance);
   }
   async function finish() {
     const today = dayNumber(Date.now());
@@ -295,7 +304,7 @@ export function renderQuiz(root, ctx) {
     body.replaceChildren(h('div', { class: 'card center' },
       h('div', { class: 'stat' }, `${score} / ${items.length}`), h('p', { class: 'muted' }, score >= items.length * 0.8 ? 'Sehr gut! 🎉' : 'Gut gemacht. Keep going! 💪'),
       h('h3', {}, 'Last 14 days'), sparkline(quizHistory(ctx)),
-      h('button', { class: 'btn primary block', style: 'margin-top:12px', onclick: () => ctx.go('today') }, 'Done')));
+      h('button', { class: 'btn primary block', style: 'margin-top:12px', onclick: () => ctx.go('more') }, 'Done')));
   }
   next();
 }
@@ -407,7 +416,7 @@ export function renderShadow(root, ctx) {
 // ---------- Drills ----------
 export function renderDrill(root, ctx, kind) {
   const titles = { articles: 'Articles drill', order: 'Word-order drill', leech: 'Hard words drill 🧩' };
-  root.append(header(ctx, titles[kind] || 'Drill', () => ctx.go('decks')));
+  root.append(header(ctx, titles[kind] || 'Drill'));
   const seen = new Set(seenCards(ctx).map(([id]) => id.split(':')[0]));
   const started = ctx.store.get('started', {});
   let list = [];
@@ -430,7 +439,7 @@ export function renderDrill(root, ctx, kind) {
     audio.stop();
     if (i >= list.length) {
       body.replaceChildren(h('div', { class: 'card center' }, kind === 'leech' ? h('p', {}, 'Done. These words will keep coming back in your reviews.') : h('div', { class: 'stat' }, `${score} / ${list.length}`),
-        h('div', { class: 'grid2', style: 'margin-top:12px' }, h('button', { class: 'btn', onclick: () => { i = 0; score = 0; list = shuffle(list); show(); } }, 'Again'), h('button', { class: 'btn primary', onclick: () => ctx.go('decks') }, 'Done'))));
+        h('div', { class: 'grid2', style: 'margin-top:12px' }, h('button', { class: 'btn', onclick: () => { i = 0; score = 0; list = shuffle(list); show(); } }, 'Again'), h('button', { class: 'btn primary', onclick: () => ctx.go('more') }, 'Done'))));
       return;
     }
     const n = list[i];

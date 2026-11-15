@@ -105,3 +105,30 @@ export function playBlob(blob) {
     a.play().catch(done);
   });
 }
+
+// ---- Feedback sounds (generated with Web Audio: no files, no network) ----
+let ctxAudio = null;
+let soundsOn = true;
+export function setSounds(on) { soundsOn = !!on; }
+export function chime(kind = 'right') {
+  if (!soundsOn || typeof window === 'undefined') return;
+  try {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;
+    ctxAudio = ctxAudio || new AC();
+    if (ctxAudio.state === 'suspended') ctxAudio.resume();
+    const notes = { right: [660, 880], combo: [660, 880, 1175], wrong: [330, 247], done: [523, 659, 784, 1047] }[kind] || [660];
+    const t0 = ctxAudio.currentTime;
+    notes.forEach((f, i) => {
+      const o = ctxAudio.createOscillator(), g = ctxAudio.createGain();
+      o.type = kind === 'wrong' ? 'triangle' : 'sine';
+      o.frequency.value = f;
+      const t = t0 + i * 0.09;
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(0.18, t + 0.015);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 0.22);
+      o.connect(g).connect(ctxAudio.destination);
+      o.start(t); o.stop(t + 0.25);
+    });
+  } catch { /* sound is optional */ }
+}

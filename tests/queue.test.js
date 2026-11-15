@@ -79,7 +79,7 @@ test('siblings: two cards of one note are never both due on the same day', () =>
 test('a due sibling waits when another card of its note was reviewed today', () => {
   const notes = parseDeckFile('#deck | T | T | 1\nn :: der Tisch :: table :: la table :: pl=die Tische', 't').notes;
   const decks = [{ id: 'T', order: 1, tags: [] }];
-  const [rec, prod] = buildCardIndex(notes).byNote.get(notes[0].id);
+  const [prod, rec] = buildCardIndex(notes).byNote.get(notes[0].id);
   const states = {
     [rec.id]: { ...newCardState(), state: State.Review, due: t0 + 3600e3 * 5, stability: 5, difficulty: 5, lastReview: t0 - 3600e3, reps: 3 },
     [prod.id]: { ...newCardState(), state: State.Review, due: t0 - DAY, stability: 5, difficulty: 5, lastReview: t0 - 5 * DAY, reps: 3 },
@@ -162,7 +162,7 @@ test('listen cards are skipped when there is no German voice', () => {
 test('plural card unlocks only when produce reaches 7-day stability', () => {
   const notes = parseDeckFile('#deck | T | T | 1\nn :: der Tisch :: table :: la table :: pl=die Tische', 't').notes;
   const decks = [{ id: 'T', order: 1, tags: [] }];
-  const [rec, prod, plural] = buildCardIndex(notes).byNote.get(notes[0].id);
+  const [prod, rec, plural] = buildCardIndex(notes).byNote.get(notes[0].id);
   const base = { ...newCardState(), state: State.Review, difficulty: 5, reps: 3, lastReview: t0 - 3 * DAY };
   const introduced = { [notes[0].id]: dayNumber(t0) - 10 };
   const mk = (s) => ({ [rec.id]: { ...base, due: t0 + 30 * DAY, stability: 30 }, [prod.id]: { ...base, due: t0 + 30 * DAY, stability: s } });

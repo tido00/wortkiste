@@ -115,15 +115,16 @@ export const stripArticle = (german) => normalise(german).replace(/^(der|die|das
 export const isPluralOnly = (note) => note.type === 'n' && (note.keys.pl || '').toLowerCase() === 'only';
 export const hasPluralCard = (note) => note.type === 'n' && !!note.keys.pl && !['-', 'only'].includes(note.keys.pl.toLowerCase());
 
-// Each card: { id, noteId, tmpl, unlock? }. Order = order of introduction.
+// Each card: { id, noteId, tmpl, unlock? }. Order = order of introduction
+// (SPEC Part C: a new word is taught, then checked with its produce card).
 export function cardsForNote(note) {
   const c = (tmpl, extra = {}) => ({ id: `${note.id}:${tmpl}`, noteId: note.id, tmpl, ...extra });
   switch (note.type) {
-    case 'n': return [c('recognise'), c('produce'), ...(hasPluralCard(note) ? [c('plural', { unlock: 'produce' })] : [])];
-    case 'v': return [c('recognise'), c('produce'),
+    case 'n': return [c('produce'), c('recognise'), ...(hasPluralCard(note) ? [c('plural', { unlock: 'produce' })] : [])];
+    case 'v': return [c('produce'), c('recognise'),
       ...(note.keys.du || note.keys.er ? [c('forms', { unlock: 'produce' })] : []),
       ...(note.keys.perf ? [c('perf', { unlock: 'produce' })] : [])];
-    case 'w': return [c('recognise'), c('produce')];
+    case 'w': return [c('produce'), c('recognise')];
     case 'p': return [c('produce'), c('listen', { needsVoice: true })];
     case 'c': return [c('cloze')];
     case 'o': return [c('order')];

@@ -20,7 +20,8 @@ See [SPEC.md](SPEC.md). Part A explains the learning design in plain words.
 | File | What it does |
 |---|---|
 | `index.html` | Page and styles |
-| `app.js` | Screens: Today, Session, Decks, Settings |
+| `app.js` | Screens: Today (guided lesson), Journey, Me, More practice, Settings |
+| `lesson.js` | The daily lesson steps: warm-up, reviews, new words, challenge, finish |
 | `srs.js` | FSRS-6 scheduler (port of ts-fsrs, tested against its outputs) |
 | `decks.js` | Reads deck files, makes cards, checks typed answers and word order |
 | `queue.js` | Daily queue: new-word limits, siblings, look-alike sets, backlog guard |
@@ -32,7 +33,7 @@ See [SPEC.md](SPEC.md). Part A explains the learning design in plain words.
 ## Adding a lesson
 1. Write `decks/<name>.txt` in the format of SPEC.md section 3 (rules in section 14).
 2. Add one line to `decks/index.json`.
-3. Push to `main`. Tests run, then the site updates. Saad taps **Start this deck** on the Decks screen.
+3. Push to `main`. Tests run, then the site updates. Saad taps **Start this lesson** on the Journey tab.
 
 Problems in a deck file never crash the app; they show under Settings → Deck problems.
 
@@ -53,7 +54,7 @@ at 365 days, where ts-fsrs can go a day over its cap.
 
 ## Approved plan for version 2 (Saad, 2026-11-15)
 Build in this order; each phase updates SPEC.md before it is built.
-1. **Guided daily lesson:** one Start button; a full path (warm-up → reviews → new words taught before tested → 5-question challenge → finish) with a "Skip to…" option; 3 tabs (Today, Journey, Me); extra modes under "More practice"; sounds, animations, combo counter.
+1. **Guided daily lesson (done, version 2.0):** one Start button; a full path (warm-up → reviews → new words taught before tested → 5-question challenge → finish) with a "Skip to…" option; 3 tabs (Today, Journey, Me); extra modes under "More practice"; sounds, animations, combo counter.
 2. **Voices:** pre-recorded open-source German voices (Thorsten, Kerstin; CC0) stored in the app; voice picker and dialogue characters; iPhone voices as backup.
 3. **Habit:** weekly rest day for the streak, badges, weekly summary, calendar reminder file.
 4. **Goethe A2 practice:** reading, writing and speaking tasks; exam-skill progress.

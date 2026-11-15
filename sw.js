@@ -1,8 +1,8 @@
 // sw.js: offline support. App files are cached on install; decks are network-first
 // (so a new lesson shows up as soon as you are online) with the cache as fallback.
-const VERSION = 'wortkiste-v1.0.0';
+const VERSION = 'wortkiste-v2.0.0';
 const SHELL = [
-  './', 'index.html', 'app.js', 'srs.js', 'decks.js', 'queue.js', 'store.js', 'audio.js', 'modes.js',
+  './', 'index.html', 'app.js', 'srs.js', 'decks.js', 'queue.js', 'store.js', 'audio.js', 'modes.js', 'lesson.js',
   'manifest.webmanifest', 'icons/apple-touch-icon.png', 'icons/icon-192.png', 'icons/icon-512.png', 'decks/index.json',
 ];
 

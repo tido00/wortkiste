@@ -224,3 +224,31 @@ Every new deck (from a class PDF or the Core list) follows these rules:
 ### Out of scope for v1
 
 Accounts, cloud sync, speech recognition, photos/images beyond emoji, Arabic meanings, gamification beyond streak and quiz scores, FSRS parameter optimisation.
+
+---
+
+## Part C. Version 2, Phase 1: the guided daily lesson (APPROVED by Saad, 2026-11-15)
+
+Where Part C differs from Parts A/B, Part C wins. Plan page: see README "Approved plan for version 2".
+
+### C1. One button, a full path, "Skip to…"
+- **Today** shows one lesson card ("Today's lesson · about N min · R reviews · N new") with one **Start** (or **Continue**) button.
+- The lesson runs these steps in order, with step dots at the top:
+  1. **Warm-up** (~1 min): 3 words already learnt, highest recall first; hear them and see them. Does not change scheduling. Skipped when nothing has been learnt yet.
+  2. **Reviews**: due learning and review cards (mixed across decks and types, as section 7; the "4 reviews : 1 new" rule no longer applies because new words have their own step).
+  3. **New words**: each brand-new note is **taught first** (teach screen: picture, word in article colour, audio, meaning, plural/forms, example, tip), then checked straight away with its first card. Learning steps bring it back later in the same step.
+  4. **Challenge**: 5 quiz questions (formats from section 8.1), today's words first. Score shown on the finish screen, not stored as the daily quiz.
+  5. **Finish**: streak, cards, new words, % right first time, challenge score, tomorrow's preview, one suggestion (Car mode in the evening, otherwise shadowing or the daily quiz).
+- **Skip to…** (bottom sheet) jumps to any step or "Finish for today". Skipped cards stay due. Warm-up and challenge run once per day.
+- The 5 / 15 min time box moves to "More practice → Quick review (5 min)".
+
+### C2. Cards
+- First card of a new `n`, `v`, `w` note is **produce** (the check after teaching); *recognise* follows on a later day (sibling rule unchanged). Card IDs do not change.
+- Grading: two big buttons **✗ Missed it** (= Again) and **✓ Got it** (= Good), plus small **Hard** and **Easy** links, each with its next interval.
+- **The app grades itself** where it can check the answer, and shows **Continue**: word order (right = Good, wrong = Again), wrong article (Again), typing mode (correct = Good, almost = Hard, wrong = Again). Undo still works.
+- Feedback: short sounds generated on the device (Web Audio, no files, no network; setting to turn off), a combo counter for answers in a row, small animations (off with "reduce motion").
+
+### C3. Screens and navigation
+- Three tabs: **Today**, **Journey** (lessons as a path with Start/Pause, words-known goal bar toward A2, hard words), **Me** (streak, stats, 14-day bars, quiz scores, settings).
+- **More practice** (from Today and the finish screen): Quick review 5 min, Daily quiz, Car mode, Shadowing, Drills, Copy weak words for Claude.
+- Visual design (colours, type, final look) is a separate later pass.

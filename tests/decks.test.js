@@ -68,16 +68,16 @@ test('noun with pl=- makes no plural card; verb without du/er/perf makes no form
     'v :: lernen :: to learn :: apprendre\n' +
     'v :: sprechen :: to speak :: parler :: du=sprichst ; er=spricht ; perf=hat gesprochen', 't');
   const tmpl = (n) => cardsForNote(n).map((c) => c.tmpl);
-  assert.deepEqual(tmpl(r.notes[0]), ['recognise', 'produce']);
-  assert.deepEqual(tmpl(r.notes[1]), ['recognise', 'produce']);
-  assert.deepEqual(tmpl(r.notes[2]), ['recognise', 'produce', 'plural']);
-  assert.deepEqual(tmpl(r.notes[3]), ['recognise', 'produce']);
-  assert.deepEqual(tmpl(r.notes[4]), ['recognise', 'produce', 'forms', 'perf']);
+  assert.deepEqual(tmpl(r.notes[0]), ['produce', 'recognise']);
+  assert.deepEqual(tmpl(r.notes[1]), ['produce', 'recognise']);
+  assert.deepEqual(tmpl(r.notes[2]), ['produce', 'recognise', 'plural']);
+  assert.deepEqual(tmpl(r.notes[3]), ['produce', 'recognise']);
+  assert.deepEqual(tmpl(r.notes[4]), ['produce', 'recognise', 'forms', 'perf']);
 });
 
 test('other note types make the right cards', () => {
   const r = parseDeckFile('#deck | T | T | 1\np :: Hallo! :: Hi! :: Salut !\nc :: Ich {{bin}} Saad. :: I am Saad. :: Je suis Saad.\no :: Ich / bin / da. :: I am here. :: Je suis là.\nw :: auch :: too :: aussi', 't');
-  assert.deepEqual(r.notes.map((n) => cardsForNote(n).map((c) => c.tmpl)), [['produce', 'listen'], ['cloze'], ['order'], ['recognise', 'produce']]);
+  assert.deepEqual(r.notes.map((n) => cardsForNote(n).map((c) => c.tmpl)), [['produce', 'listen'], ['cloze'], ['order'], ['produce', 'recognise']]);
   const cl = parseCloze(r.notes[1].german);
   assert.deepEqual(cl.answers, ['bin']);
   assert.equal(cl.full, 'Ich bin Saad.');

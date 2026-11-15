@@ -60,5 +60,5 @@ most useful in daily life first, `tags=A1,core` (or A2), file `decks/core-A1-<n>
 - Commit (`Add Lektion 4 deck (N notes)`), push to `main`; the GitHub Action tests and publishes.
 - Check the Actions run succeeded.
 - Message to Saad, short and plain:
-  "Lektion 4 is in the app: N new words and phrases, M grammar cards. Open Wortkiste → Decks →
-  tap **Start this deck** on 4A when you're ready." Mention any page you could not read.
+  "Lektion 4 is in the app: N new words and phrases, M grammar cards. Open Wortkiste → Journey →
+  tap **Start this lesson** on 4A when you're ready." Mention any page you could not read.

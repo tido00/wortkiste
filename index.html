@@ -165,14 +165,66 @@ input[type=range] { width: 100%; min-height: 44px; accent-color: var(--accent); 
   padding: 10px 16px; border-radius: 12px; font-size: 15px; z-index: 50; max-width: 90vw; }
 .problem { font-size: 13px; padding: 8px 0; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; }
 code { font-size: 13px; background: var(--surface-2); padding: 1px 4px; border-radius: 4px; }
+
+/* v2: guided lesson */
+.eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.streak { text-align: center; line-height: 1.1; }
+.streak b { display: block; font-size: 22px; }
+.streak span { font-size: 12px; color: var(--muted); }
+.lesson-card { margin-top: 16px; display: grid; gap: 8px; }
+.lesson-meta { font-size: 26px; font-weight: 800; letter-spacing: -.01em; }
+.btn.big { min-height: 56px; font-size: 18px; border-radius: 14px; }
+.btn.again { background: var(--bad); }
+.dots { display: flex; gap: 5px; margin: 4px 0; }
+.dots i { flex: 1; height: 8px; border-radius: 4px; background: var(--surface-2); }
+.dots i.done { background: var(--ok); }
+.dots i.now { background: var(--accent); }
+.dots i.empty { opacity: .35; }
+.topbar .dots { margin: 0; }
+.step-label { font-size: 13px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin: 2px 0 8px; }
+.combo { min-height: 26px; text-align: center; }
+.combo-pop { display: inline-block; font-weight: 800; color: var(--warn); animation: pop .35s ease-out; }
+.pop-in { animation: rise .22s ease-out; }
+@keyframes pop { 0% { transform: scale(.6); opacity: 0; } 70% { transform: scale(1.15); } 100% { transform: scale(1); opacity: 1; } }
+@keyframes rise { from { transform: translateY(8px); opacity: .4; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .pop-in, .combo-pop { animation: none; } }
+.gbtn { min-height: 64px; border-radius: 14px; font-size: 18px; font-weight: 800; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 2px solid; background: var(--surface); }
+.gbtn small { font-size: 12px; font-weight: 500; color: var(--muted); }
+.gbtn.miss { color: var(--bad); border-color: var(--bad); }
+.gbtn.got { color: var(--surface); background: var(--ok); border-color: var(--ok); }
+.gbtn.got small { color: var(--surface); opacity: .85; }
+.linkbtn { background: none; border: 0; color: var(--muted); font-size: 14px; min-height: 44px; padding: 0 6px; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.badge { font-size: 13px; color: var(--muted); text-align: right; }
+.teach .emoji { margin-top: 4px; }
+.sheet-back { position: fixed; inset: 0; background: rgba(0,0,0,.35); z-index: 40; display: flex; align-items: flex-end; justify-content: center; }
+.sheet { background: var(--bg); width: 100%; max-width: 560px; border-radius: 20px 20px 0 0; padding: 16px 16px calc(env(safe-area-inset-bottom) + 16px); display: grid; gap: 8px; animation: rise .2s ease-out; }
+.sheet-item { min-height: 52px; display: flex; justify-content: space-between; align-items: center; padding: 0 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); font-weight: 600; cursor: pointer; }
+.sheet-item.now { border: 2px solid var(--accent); }
+.sheet-item:disabled { opacity: .45; }
+.more-list { display: grid; gap: 8px; margin-top: 16px; }
+.more-item { display: block; text-align: left; padding: 12px 14px; min-height: 56px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface); color: var(--text); text-decoration: none; cursor: pointer; width: 100%; }
+.card.suggest { display: block; color: var(--text); text-decoration: none; border-color: var(--accent); }
+.card.tight { padding: 12px 6px; margin-top: 0; }
+.big-num { font-size: 44px; font-weight: 800; line-height: 1.1; margin-top: 6px; }
+.meter.big { height: 10px; border-radius: 5px; }
+.meter.big div { border-radius: 5px; }
+.path { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.stop { display: flex; gap: 12px; position: relative; padding-bottom: 18px; }
+.stop::before { content: ""; position: absolute; left: 10px; top: 24px; bottom: 0; width: 2px; background: var(--line); }
+.stop:last-child::before { display: none; }
+.stop > i { flex: none; width: 22px; height: 22px; border-radius: 50%; border: 3px solid var(--line); background: var(--surface); margin-top: 2px; }
+.stop.done > i { background: var(--ok); border-color: var(--ok); }
+.stop.now > i { border-color: var(--accent); background: var(--accent); box-shadow: 0 0 0 4px var(--surface-2); }
+.stop.goal > i { border-color: var(--warn); }
+a.icon-btn { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; color: var(--text); font-size: 26px; }
 </style>
 </head>
 <body>
 <div id="app"><p class="muted center" style="margin-top:40vh">Wortkiste wird geladen…</p></div>
 <nav class="tabs" id="tabs">
   <a href="#/today" data-tab="today"><span>🏠</span>Today</a>
-  <a href="#/decks" data-tab="decks"><span>📚</span>Decks</a>
-  <a href="#/settings" data-tab="settings"><span>⚙️</span>Settings</a>
+  <a href="#/journey" data-tab="journey"><span>🧭</span>Journey</a>
+  <a href="#/me" data-tab="me"><span>👤</span>Me</a>
 </nav>
 <noscript>Wortkiste needs JavaScript.</noscript>
 <script type="module" src="app.js"></script>
