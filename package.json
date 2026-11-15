@@ -1,0 +1,7 @@
+{
+  "name": "wortkiste",
+  "private": true,
+  "type": "module",
+  "description": "Saad's German flashcards. No dependencies, no build step.",
+  "scripts": { "test": "node --test tests/" }
+}
