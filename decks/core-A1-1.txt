@@ -1,0 +1,55 @@
+// Wortkiste deck file, format v2 (see SPEC.md section 3)
+// Core deck, batch 1: Goethe-Zertifikat A1 Wortliste words not in the Lektion 1-3 deck, most useful first.
+// Meanings and examples written fresh, 2026-11-15.
+
+#deck | CORE-A1-1 | Core A1 · 1 (Goethe word list) | 100 | tags=A1,core
+w :: gut :: good, well :: bon, bien :: set=gut-schlecht ; ex=Mein Deutsch ist schon gut. ; exen=My German is already good.
+p :: Entschuldigung! :: Excuse me! / Sorry! :: Excusez-moi ! / Pardon !
+n :: die Arbeit :: work, job :: le travail :: pl=die Arbeiten ; img=🧑‍💼 ; ex=Die Arbeit beginnt um neun Uhr. ; exen=Work starts at nine o'clock.
+v :: gehen :: to go (on foot), to walk :: aller (à pied) :: set=gehen-fahren ; ex=Ich gehe jetzt nach Hause. ; exen=I'm going home now. ; tip=gehen = on foot; fahren = by car, bus or train
+w :: hier :: here :: ici :: set=hier-dort ; ex=Ich wohne hier in Marrakesch. ; exen=I live here in Marrakech.
+n :: die Zeit :: time :: le temps :: pl=die Zeiten ; img=⏰ ; ex=Hast du heute Zeit? ; exen=Are you free today? ; ff=die Zeit = time; the weather is das Wetter (French says "le temps" for both)
+v :: können :: can, to be able to :: pouvoir :: du=kannst ; er=kann ; ex=Ich kann ein bisschen Deutsch. ; exen=I can speak a little German.
+p :: Können Sie das wiederholen? :: Can you repeat that? :: Pouvez-vous répéter ?
+w :: jetzt :: now :: maintenant :: ex=Jetzt lerne ich Deutsch. ; exen=Now I'm learning German.
+n :: das Haus :: house :: la maison :: pl=die Häuser ; img=🏠 ; ex=Meine Eltern haben ein Haus. ; exen=My parents have a house. ; tip=nach Hause = (going) home; zu Hause = at home
+v :: müssen :: must, to have to :: devoir :: du=musst ; er=muss ; ex=Ich muss heute lange arbeiten. ; exen=I have to work late today. ; ff=ich muss nicht = I don't have to (not "I must not")
+n :: der Tag :: day :: le jour :: pl=die Tage ; img=📅 ; set=time-units ; ex=Ich lerne jeden Tag Deutsch. ; exen=I learn German every day.
+w :: gern :: gladly; (to) like doing :: volontiers :: ex=Ich trinke gern Tee mit Minze. ; exen=I like drinking mint tea. ; tip=verb + gern = you like doing it: Ich lese gern.
+v :: wissen :: to know (a fact) :: savoir :: du=weißt ; er=weiß ; set=kennen-wissen ; ex=Ich weiß es nicht. ; exen=I don't know. ; tip=wissen = know a fact; kennen = know a person or a place
+n :: das Geld :: money :: l'argent :: pl=- ; img=💰 ; ex=Ich brauche Geld für den Kurs. ; exen=I need money for the course.
+p :: Wie viel kostet das? :: How much is it? :: Combien ça coûte ?
+v :: fahren :: to go (by car, bus, train), to drive :: aller (en véhicule), conduire :: du=fährst ; er=fährt ; set=gehen-fahren ; ex=Ich fahre nachts mit dem Auto. ; exen=I drive at night.
+n :: der Freund :: friend (m); boyfriend :: l'ami, le copain :: pl=die Freunde ; set=friend ; ex=Mein Freund wohnt in Rabat. ; exen=My friend lives in Rabat.
+w :: viel :: a lot, much :: beaucoup :: ex=Ich arbeite viel. ; exen=I work a lot.
+v :: wollen :: to want :: vouloir :: du=willst ; er=will ; ex=Ich will in Deutschland arbeiten. ; exen=I want to work in Germany. ; ff=ich will = I want, not "I will"
+n :: die Woche :: week :: la semaine :: pl=die Wochen ; set=time-units ; ex=Ich habe drei Kurse pro Woche. ; exen=I have three classes a week.
+w :: dort :: there :: là-bas :: set=hier-dort ; ex=Mein Bruder wohnt dort. ; exen=My brother lives there.
+v :: kennen :: to know (a person, a place) :: connaître :: set=kennen-wissen ; ex=Kennst du Marrakesch? ; exen=Do you know Marrakech?
+n :: das Jahr :: year :: l'année, l'an :: pl=die Jahre ; set=time-units ; ex=Nächstes Jahr mache ich eine Ausbildung. ; exen=Next year I'm doing vocational training.
+p :: Ich hätte gern einen Tee. :: I'd like a tea, please. :: Je voudrais un thé. :: tip=Ich hätte gern … = the polite way to order
+w :: schlecht :: bad, badly :: mauvais, mal :: set=gut-schlecht ; ex=Das Wetter ist heute schlecht. ; exen=The weather is bad today.
+n :: der Bus :: bus :: le bus :: pl=die Busse ; img=🚌 ; set=transport ; ex=Ich fahre mit dem Bus. ; exen=I go by bus.
+v :: geben :: to give :: donner :: du=gibst ; er=gibt ; ex=Ich gebe dir meine Telefonnummer. ; exen=I'll give you my phone number. ; tip=es gibt = there is / there are
+n :: die Freundin :: friend (f); girlfriend :: l'amie, la copine :: pl=die Freundinnen ; set=friend ; tip=-in → die
+w :: immer :: always :: toujours :: set=frequency ; ex=Ich trinke immer Tee. ; exen=I always drink tea.
+v :: helfen :: to help :: aider :: du=hilfst ; er=hilft ; ex=Kannst du mir helfen? ; exen=Can you help me?
+n :: das Zimmer :: room :: la pièce, la chambre :: pl=die Zimmer ; img=🛋️ ; ex=Mein Zimmer ist klein. ; exen=My room is small.
+p :: Kein Problem. :: No problem. :: Pas de problème.
+w :: groß :: big, tall :: grand :: set=gross-klein ; ex=Marrakesch ist groß. ; exen=Marrakech is big.
+n :: der Termin :: appointment :: le rendez-vous :: pl=die Termine ; img=📆 ; ex=Ich habe morgen einen Termin. ; exen=I have an appointment tomorrow. ; ff=Termin = appointment, not "term"
+v :: anrufen :: to call (on the phone) :: appeler (au téléphone) :: sep=an ; img=📞 ; ex=Ich rufe dich morgen an. ; exen=I'll call you tomorrow. ; tip=separable: ich rufe … an
+n :: der Zug :: train :: le train :: pl=die Züge ; img=🚆 ; set=transport
+w :: klein :: small, short :: petit :: set=gross-klein ; ex=Meine Wohnung ist klein. ; exen=My flat is small.
+v :: finden :: to find; to think (an opinion) :: trouver :: du=findest ; er=findet ; ex=Ich finde Deutsch schön. ; exen=I think German is beautiful.
+n :: das Wochenende :: weekend :: le week-end :: pl=die Wochenenden ; ex=Am Wochenende habe ich Zeit. ; exen=I'm free at the weekend.
+w :: oft :: often :: souvent :: set=frequency ; ex=Ich höre oft deutsche Musik. ; exen=I often listen to German music.
+v :: warten :: to wait :: attendre :: du=wartest ; er=wartet ; ex=Ich warte auf den Bus. ; exen=I'm waiting for the bus. ; tip=warten auf + Akkusativ
+n :: die Firma :: company :: l'entreprise :: pl=die Firmen ; ex=Meine Firma ist in Marrakesch. ; exen=My company is in Marrakech.
+n :: der Kunde :: customer (m) :: le client :: pl=die Kunden ; ex=Heute habe ich zehn Kunden. ; exen=Today I have ten customers. ; tip=female customer: die Kundin
+v :: verkaufen :: to sell :: vendre :: ex=Ich verkaufe Handys. ; exen=I sell mobile phones. ; tip=kaufen = buy; verkaufen = sell
+w :: teuer :: expensive :: cher :: ex=Das Handy ist sehr teuer. ; exen=The phone is very expensive.
+n :: der Bahnhof :: train station :: la gare :: pl=die Bahnhöfe ; img=🚉 ; ex=Der Bahnhof ist hier links. ; exen=The station is here on the left.
+n :: das Wetter :: weather :: le temps (météo) :: pl=- ; img=🌤️ ; ex=Das Wetter in Marrakesch ist warm. ; exen=The weather in Marrakech is warm.
+n :: die Ausbildung :: vocational training :: la formation professionnelle :: pl=die Ausbildungen ; img=🛠️ ; tip=-ung → die ; ex=Ich möchte eine Ausbildung in Deutschland machen. ; exen=I'd like to do vocational training in Germany.
+p :: Bis morgen! :: See you tomorrow! :: À demain !

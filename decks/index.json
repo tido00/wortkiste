@@ -1,5 +1,6 @@
 {
   "decks": [
-    { "file": "L1-L3.txt", "title": "DaF kompakt neu A1, Lektion 1–3" }
+    { "file": "L1-L3.txt", "title": "DaF kompakt neu A1, Lektion 1–3" },
+    { "file": "core-A1-1.txt", "title": "Core A1 · 1 (Goethe word list)" }
   ]
 }
