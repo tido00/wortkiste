@@ -51,6 +51,16 @@ at 365 days, where ts-fsrs can go a day over its cap.
 - "Words known" counts word and phrase notes with at least one card that has graduated to review.
 - Core deck batch 1 (`decks/core-A1-1.txt`): 50 Goethe A1 words not in Lektion 1–3.
 
+## Approved plan for version 2 (Saad, 2026-11-15)
+Build in this order; each phase updates SPEC.md before it is built.
+1. **Guided daily lesson:** one Start button; a full path (warm-up → reviews → new words taught before tested → 5-question challenge → finish) with a "Skip to…" option; 3 tabs (Today, Journey, Me); extra modes under "More practice"; sounds, animations, combo counter.
+2. **Voices:** pre-recorded open-source German voices (Thorsten, Kerstin; CC0) stored in the app; voice picker and dialogue characters; iPhone voices as backup.
+3. **Habit:** weekly rest day for the streak, badges, weekly summary, calendar reminder file.
+4. **Goethe A2 practice:** reading, writing and speaking tasks; exam-skill progress.
+
+The visual design (colours, type, look) gets its own pass with Saad's design skills.
+Lesson decks are made with the project skill `.claude/skills/wortkiste-deck-writer`.
+
 ## Ideas for v2
 - FSRS parameter optimisation from Saad's own review history (after a few months of data).
 - More Core batches (A1 batch 2+, then A2) and lesson decks as the course goes on.
