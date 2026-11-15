@@ -216,6 +216,12 @@ code { font-size: 13px; background: var(--surface-2); padding: 1px 4px; border-r
 .stop.done > i { background: var(--ok); border-color: var(--ok); }
 .stop.now > i { border-color: var(--accent); background: var(--accent); box-shadow: 0 0 0 4px var(--surface-2); }
 .stop.goal > i { border-color: var(--warn); }
+/* Voice picker */
+.voice-list { display: grid; gap: 8px; }
+.voice-item { display: flex; gap: 8px; align-items: center; border: 1px solid var(--line); border-radius: 14px; padding: 4px 6px 4px 4px; background: var(--surface); }
+.voice-item.on { border: 2px solid var(--accent); }
+.voice-pick { flex: 1; min-width: 0; text-align: left; background: none; border: 0; padding: 8px 10px; min-height: 52px; cursor: pointer; }
+.voice-item.on .voice-pick > div:first-child::after { content: "  ✓"; color: var(--accent); }
 a.icon-btn { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; color: var(--text); font-size: 26px; }
 </style>
 </head>

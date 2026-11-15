@@ -52,12 +52,17 @@ most useful in daily life first, `tags=A1,core` (or A2), file `decks/core-A1-<n>
 ## 4. Add and test
 1. Save as `decks/<id>.txt` (e.g. `decks/L4A-L4C.txt`) with the two header comment lines used in existing decks.
 2. Add one line to `decks/index.json`: `{ "file": "...", "title": "..." }`.
-3. Run `node --test tests/`. The deck tests parse every deck listed in index.json and fail on any problem
+3. Record the audio for the new texts (SPEC Part D). Voice models (CC0) go in a scratch folder:
+   `https://huggingface.co/rhasspy/piper-voices/resolve/main/de/de_DE/<name>/<quality>/de_DE-<name>-<quality>.onnx`
+   (+ `.onnx.json`) for `kerstin/medium`, `thorsten/high`, `thorsten_emotional/medium`. Needs `pip install piper-tts`
+   and ffmpeg (the "wortkiste" cloud environment allows these hosts and installs piper). Then run
+   `python3 tools/make_audio.py --models <folder>`; it only makes the missing clips.
+4. Run `node --test tests/`. The deck tests parse every deck listed in index.json and fail on any problem
    line or any word-order card whose own `alt` orders are rejected. Fix and re-run until green.
-4. Report notes that were skipped as duplicates (count notes per type; compare with what you wrote).
+5. Report notes that were skipped as duplicates (count notes per type; compare with what you wrote).
 
 ## 5. Publish and tell Saad
-- Commit (`Add Lektion 4 deck (N notes)`), push to `main`; the GitHub Action tests and publishes.
+- Commit the deck, `decks/index.json` and the new `audio/` files (`Add Lektion 4 deck (N notes)`), push to `main`; the GitHub Action tests and publishes.
 - Check the Actions run succeeded.
 - Message to Saad, short and plain:
   "Lektion 4 is in the app: N new words and phrases, M grammar cards. Open Wortkiste → Journey →

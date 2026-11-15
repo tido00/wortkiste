@@ -1,9 +1,10 @@
 // sw.js: offline support. App files are cached on install; decks are network-first
 // (so a new lesson shows up as soon as you are online) with the cache as fallback.
-const VERSION = 'wortkiste-v2.0.0';
+const VERSION = 'wortkiste-v2.1.0';
+const AUDIO = 'wortkiste-audio'; // recorded clips: names never change, so they are kept across updates
 const SHELL = [
   './', 'index.html', 'app.js', 'srs.js', 'decks.js', 'queue.js', 'store.js', 'audio.js', 'modes.js', 'lesson.js',
-  'manifest.webmanifest', 'icons/apple-touch-icon.png', 'icons/icon-192.png', 'icons/icon-512.png', 'decks/index.json',
+  'manifest.webmanifest', 'icons/apple-touch-icon.png', 'icons/icon-192.png', 'icons/icon-512.png', 'decks/index.json', 'audio/index.json',
 ];
 
 self.addEventListener('install', (event) => {
@@ -20,7 +21,7 @@ self.addEventListener('install', (event) => {
 
 self.addEventListener('activate', (event) => {
   event.waitUntil((async () => {
-    for (const key of await caches.keys()) if (key !== VERSION) await caches.delete(key);
+    for (const key of await caches.keys()) if (key !== VERSION && key !== AUDIO) await caches.delete(key);
     await self.clients.claim();
   })());
 });
@@ -30,7 +31,20 @@ self.addEventListener('fetch', (event) => {
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
   if (url.origin !== self.location.origin) return;
-  const isDeck = url.pathname.includes('/decks/');
+  const isDeck = url.pathname.includes('/decks/') || url.pathname.endsWith('/audio/index.json');
+  if (url.pathname.includes('/audio/') && url.pathname.endsWith('.mp3')) {
+    event.respondWith((async () => {
+      const cache = await caches.open(AUDIO);
+      const hit = await cache.match(req, { ignoreSearch: true });
+      if (hit) return hit;
+      try {
+        const res = await fetch(req);
+        if (res.ok && res.status === 200) cache.put(req, res.clone());
+        return res;
+      } catch { return new Response('', { status: 504 }); }
+    })());
+    return;
+  }
   event.respondWith((async () => {
     const cache = await caches.open(VERSION);
     const key = req.mode === 'navigate' ? 'index.html' : req;

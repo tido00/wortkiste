@@ -1,7 +1,7 @@
 // app.js: UI and router. Tabs: Today (guided daily lesson), Journey, Me. Plus More practice and the extra modes.
 
 import { review, preview, newCardState, State, DEFAULT_PARAMS, formatInterval } from './srs.js';
-import { parseDeckFile, mergeDecks, article, parseCloze, checkTyped, isPluralOnly } from './decks.js';
+import { parseDeckFile, mergeDecks, article, parseCloze, checkTyped, isPluralOnly, audioTexts } from './decks.js';
 import {
   buildQueue, buildCardIndex, dayNumber, dayEnd, appDayDiff, createSession, sessionNext, sessionAfterGrade,
   sessionRemaining, isLeech, streak, forecastReviews, DEFAULT_SETTINGS, MATURE_STABILITY, GUARD_OFF,
@@ -14,7 +14,7 @@ import {
   renderQuiz, renderCar, renderShadow, renderDrill, quizHistory, buildQuiz, quizItem,
 } from './modes.js';
 
-const VERSION = '2.0.0';
+const VERSION = '2.1.0';
 const DAY = 86400000;
 const A = {
   store: null, notes: [], decks: [], problems: [], index: null, noteById: new Map(), deckById: new Map(),
@@ -26,7 +26,34 @@ const S = () => ({ ...DEFAULT_SETTINGS, ...(A.store.get('settings', {}) || {}) }
 const params = () => ({ ...DEFAULT_PARAMS, requestRetention: S().retention });
 const srsOpts = { dayDiff: appDayDiff };
 async function saveSettings(patch) { await A.store.set('settings', { ...S(), ...patch }); applyAudioPrefs(); }
-function applyAudioPrefs() { const s = S(); audio.setPrefs({ voice: s.voice, rate: s.rate }); audio.setSounds(s.sounds); }
+function applyAudioPrefs() { const s = S(); audio.setPrefs({ voice: s.voice, rate: s.rate, speaker: s.speaker }); audio.setSounds(s.sounds); }
+
+// Save the recorded clips of started lessons on the device, so audio works offline (SPEC D3).
+let saving = null;
+async function saveAudioOffline({ all = false, onProgress } = {}) {
+  if (typeof caches === 'undefined' || !audio.hasRecorded()) return { done: 0, total: 0 };
+  if (saving) return saving;
+  saving = (async () => {
+    const started = A.store.get('started', {});
+    const introduced = A.store.get('introduced', {});
+    const notes = all ? A.notes : A.notes.filter((n) => introduced[n.id] != null || (A.deckById.get(n.deckId)?.core ? started[n.deckId] !== false : started[n.deckId]));
+    const urls = [...new Set(audio.recordedUrls(notes.flatMap(audioTexts), S().speaker))];
+    const cache = await caches.open('wortkiste-audio');
+    let done = 0;
+    const queue = urls.slice();
+    const worker = async () => {
+      while (queue.length) {
+        const url = queue.shift();
+        try { if (!(await cache.match(url))) await cache.add(url); } catch { /* offline or blocked: try next time */ }
+        done++;
+        if (onProgress) onProgress(done, urls.length);
+      }
+    };
+    await Promise.all([worker(), worker(), worker(), worker()]);
+    return { done, total: urls.length };
+  })();
+  try { return await saving; } finally { saving = null; }
+}
 
 // ---------- Boot ----------
 async function loadDecks() {
@@ -64,12 +91,14 @@ async function boot() {
   A.noteById = new Map(A.notes.map((n) => [n.id, n]));
   A.deckById = new Map(A.decks.map((d) => [d.id, d]));
   applyAudioPrefs();
-  await audio.loadVoices();
+  await Promise.all([audio.loadVoices(), audio.loadRecorded()]);
   A.hasVoice = audio.hasGerman();
+  document.addEventListener('pointerdown', () => audio.unlockAudio(), { once: true, capture: true });
   window.addEventListener('hashchange', route);
   route();
   if (!A.hasVoice) audio.loadVoices(4000).then(() => { if (audio.hasGerman() && !A.hasVoice) { A.hasVoice = true; if (!A.lesson && !A.quick) route(); } });
   if ('serviceWorker' in navigator && location.protocol !== 'file:') navigator.serviceWorker.register('sw.js').catch(() => {});
+  if (navigator.onLine !== false) setTimeout(() => saveAudioOffline(), 3000);
 }
 
 // ---------- Router ----------
@@ -757,6 +786,7 @@ function renderJourney() {
         pct < 100 ? h('button', { class: `btn small ${running ? 'ghost' : 'primary'}`, style: 'margin-top:8px', onclick: async () => {
           await A.store.set('started', { ...A.store.get('started', {}), [d.id]: !running });
           toast(running ? 'Paused. Reviews of this deck still run.' : 'Started! New words from this lesson come in your daily lesson.');
+          if (!running) saveAudioOffline();
           route();
         } }, running ? 'Pause new words' : (d.core ? 'Resume' : 'Start this lesson')) : null)));
   }
@@ -828,19 +858,38 @@ function renderSettings() {
   // Audio
   const voices = audio.germanVoices();
   const rateOut = h('span', {}, `${s.rate.toFixed(2)}×`);
-  r.append(h('h2', {}, 'Audio'), h('div', { class: 'card' },
-    !A.hasVoice ? h('div', { class: 'notice', style: 'margin-top:0' }, 'No German voice found on this device, so 🔊 buttons and listening cards are hidden. Add one with the tip below, then reopen the app.') : null,
-    sw('autoplay', 'Play German after reveal'),
-    sw('sounds', 'Sounds for right and wrong answers'),
-    voices.length ? h('div', { class: 'setting' }, h('label', { class: 'title', for: 'voice' }, 'German voice'),
+  const offlineMsg = h('p', { class: 'small muted', style: 'margin:6px 0 0' });
+  const speakers = audio.SPEAKERS.filter((sp) => sp.id === 'device' ? audio.hasDeviceGerman() : audio.recordedUrls(['Ich lerne Deutsch.'], sp.id).length);
+  r.append(h('h2', {}, 'Voice'), h('div', { class: 'card' },
+    !A.hasVoice ? h('div', { class: 'notice', style: 'margin-top:0' }, 'No German voice found, so 🔊 buttons and listening cards are hidden.') : null,
+    h('div', { class: 'voice-list', role: 'radiogroup', 'aria-label': 'German voice' }, speakers.map((sp) => h('div', { class: `voice-item ${s.speaker === sp.id ? 'on' : ''}` },
+      h('button', { class: 'voice-pick', role: 'radio', 'aria-checked': String(s.speaker === sp.id), onclick: async () => {
+        await saveSettings({ speaker: sp.id });
+        audio.speak('Hallo Saad! Ich bin deine Stimme.');
+        saveAudioOffline();
+        route();
+      } }, h('div', { style: 'font-weight:700' }, sp.label), h('div', { class: 'small muted' }, sp.text)),
+      h('button', { class: 'icon-btn', 'aria-label': `Hear ${sp.label}`, onclick: () => {
+        const keep = S().speaker; audio.setPrefs({ speaker: sp.id }); audio.stop(); audio.speak('Guten Morgen! Wie geht es dir?').finally(() => audio.setPrefs({ speaker: keep }));
+      } }, '▶')))),
+    s.speaker === 'device' && voices.length ? h('div', { class: 'setting' }, h('label', { class: 'title', for: 'voice' }, 'iPhone voice'),
       h('select', { id: 'voice', style: 'margin-top:8px', onchange: async (e) => { await saveSettings({ voice: e.target.value }); audio.speak('Guten Morgen! Wie geht es dir?'); } },
         h('option', { value: '' }, `Automatic (${audio.bestGermanVoice() ? audio.bestGermanVoice().name : 'best'})`),
-        voices.map((v) => h('option', { value: v.voiceURI, selected: s.voice === v.voiceURI }, `${v.name} (${v.lang})`)))) : null,
+        voices.map((v) => h('option', { value: v.voiceURI, selected: s.voice === v.voiceURI }, `${v.name} (${v.lang})`))),
+      h('p', { class: 'small muted' }, 'Better iPhone voice for free: iPhone Settings → Accessibility → Spoken Content → Voices → German → download ', h('i', {}, 'Anna (Enhanced)'), '.')) : null,
     h('div', { class: 'setting' }, h('div', { class: 'row spread' }, h('label', { class: 'title', for: 'rate' }, 'Speed'), rateOut),
       h('input', { type: 'range', id: 'rate', min: 0.7, max: 1, step: 0.05, value: s.rate, oninput: (e) => { rateOut.textContent = `${Number(e.target.value).toFixed(2)}×`; },
         onchange: async (e) => { await saveSettings({ rate: Number(e.target.value) }); audio.speak('Ich lerne Deutsch.'); } })),
-    A.hasVoice ? h('button', { class: 'btn small', onclick: () => audio.speak('Hallo Saad! Ich bin deine Stimme.') }, '🔊 Test voice') : null,
-    h('p', { class: 'small muted' }, 'Better voice for free: iPhone Settings → Accessibility → Spoken Content → Voices → German → download ', h('i', {}, 'Anna (Enhanced)'), '.')));
+    sw('autoplay', 'Play German after reveal'),
+    sw('sounds', 'Sounds for right and wrong answers'),
+    audio.hasRecorded() && s.speaker !== 'device' ? h('div', { class: 'setting' }, h('label', { class: 'title' }, 'Offline audio'),
+      h('p', { class: 'small muted', style: 'margin:4px 0 8px' }, 'Lessons you start are saved on this phone automatically. To save every lesson now (needs internet):'),
+      h('button', { class: 'btn small', onclick: async (e) => {
+        e.target.disabled = true;
+        const res = await saveAudioOffline({ all: true, onProgress: (d, t) => { offlineMsg.textContent = `Saving… ${d} / ${t}`; } });
+        offlineMsg.textContent = res.total ? `Saved: ${res.done} clips are on this phone.` : 'Nothing to save.';
+        e.target.disabled = false;
+      } }, '⬇️ Save all voices for offline'), offlineMsg) : null));
 
   // Backup
   const restoreBox = h('div');

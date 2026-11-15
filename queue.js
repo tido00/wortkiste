@@ -21,6 +21,7 @@ export const DEFAULT_SETTINGS = Object.freeze({
   typing: false,
   autoplay: true,
   sounds: true,
+  speaker: 'mix',      // SPEC Part D: recorded voices
   voice: '',
   rate: 0.9,
 });

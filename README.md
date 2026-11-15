@@ -10,7 +10,7 @@ opened from the iPhone home screen.
 2. Tap the **Share** button (square with an arrow).
 3. Tap **Add to Home Screen**, then **Add**.
 
-Better German voice (free): iPhone Settings → Accessibility → Spoken Content → Voices → German → download *Anna (Enhanced)*.
+Voices: Me → Settings → Voice. Natural recorded voices are built in; the iPhone voice is a backup.
 
 Your progress lives only on your phone. Save a backup now and then: Settings → Save backup.
 
@@ -26,14 +26,16 @@ See [SPEC.md](SPEC.md). Part A explains the learning design in plain words.
 | `decks.js` | Reads deck files, makes cards, checks typed answers and word order |
 | `queue.js` | Daily queue: new-word limits, siblings, look-alike sets, backlog guard |
 | `store.js` | Storage on the device (IndexedDB) and backup files |
-| `audio.js` | German voice and record & compare |
+| `audio.js` | Recorded voices (iPhone voice as backup), record & compare, sounds |
+| `audio/` | Recorded clips (free CC0 Piper voices: Kerstin, Thorsten, Thorsten's moods), made by `tools/make_audio.py` |
 | `modes.js` | Daily quiz, car mode, shadowing, drills, copy for Claude |
 | `sw.js` | Offline support |
 
 ## Adding a lesson
 1. Write `decks/<name>.txt` in the format of SPEC.md section 3 (rules in section 14).
 2. Add one line to `decks/index.json`.
-3. Push to `main`. Tests run, then the site updates. Saad taps **Start this lesson** on the Journey tab.
+3. Record its audio: `python3 tools/make_audio.py --models <folder with the voice files>` (see SPEC Part D).
+4. Push to `main`. Tests run, then the site updates. Saad taps **Start this lesson** on the Journey tab.
 
 Problems in a deck file never crash the app; they show under Settings → Deck problems.
 
@@ -55,7 +57,7 @@ at 365 days, where ts-fsrs can go a day over its cap.
 ## Approved plan for version 2 (Saad, 2026-11-15)
 Build in this order; each phase updates SPEC.md before it is built.
 1. **Guided daily lesson (done, version 2.0):** one Start button; a full path (warm-up → reviews → new words taught before tested → 5-question challenge → finish) with a "Skip to…" option; 3 tabs (Today, Journey, Me); extra modes under "More practice"; sounds, animations, combo counter.
-2. **Voices:** pre-recorded open-source German voices (Thorsten, Kerstin; CC0) stored in the app; voice picker and dialogue characters; iPhone voices as backup.
+2. **Voices (done, version 2.1):** pre-recorded open-source German voices (Thorsten, Kerstin; CC0) stored in the app; voice picker and dialogue characters; iPhone voices as backup.
 3. **Habit:** weekly rest day for the streak, badges, weekly summary, calendar reminder file.
 4. **Goethe A2 practice:** reading, writing and speaking tasks; exam-skill progress.
 
@@ -63,6 +65,7 @@ The visual design (colours, type, look) gets its own pass with Saad's design ski
 Lesson decks are made with the project skill `.claude/skills/wortkiste-deck-writer`.
 
 ## Ideas for v2
+- Dialogues with characters (a deck format for two-person dialogues, each line in its own voice).
 - FSRS parameter optimisation from Saad's own review history (after a few months of data).
 - More Core batches (A1 batch 2+, then A2) and lesson decks as the course goes on.
 - Optional Perfekt cards once A2 decks start, plus a Perfekt drill.

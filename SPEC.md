@@ -252,3 +252,23 @@ Where Part C differs from Parts A/B, Part C wins. Plan page: see README "Approve
 - Three tabs: **Today**, **Journey** (lessons as a path with Start/Pause, words-known goal bar toward A2, hard words), **Me** (streak, stats, 14-day bars, quiz scores, settings).
 - **More practice** (from Today and the finish screen): Quick review 5 min, Daily quiz, Car mode, Shadowing, Drills, Copy weak words for Claude.
 - Visual design (colours, type, final look) is a separate later pass.
+
+---
+
+## Part D. Version 2, Phase 2: natural voices (APPROVED by Saad, 2026-11-15)
+
+### D1. Recorded voices
+- Every German text the app can speak (`audioTexts()` in decks.js: the note's German, example, plural, verb forms, cloze sentence, word-order sentence, plus a few fixed phrases) is recorded once with free, open-source **Piper** voices, all **CC0**: Kerstin (female, medium), Thorsten (male, high), and Thorsten "emotional" (amused, surprised, whispering, sleepy).
+- Files: `audio/<voice>/<key>.mp3` (mono MP3, ~5 KB each), `key = audioKey(text)` (same stable hash as note IDs, on the cleaned-up text). `audio/index.json` lists the keys per voice.
+- Made by `tools/make_audio.py` (dev tool, not part of the app). Only missing clips are made. **Every new deck must be recorded before publishing**; a test fails if any text lacks a clip.
+- No network call to any speech service at runtime: the clips are the app's own files.
+
+### D2. Voice picker (Me → Settings → Voice)
+- **Kerstin & Thorsten** (default): both voices, a stable choice per text, so you hear different speakers (talker variety trains listening).
+- **Kerstin**, **Thorsten**, **Thorsten's moods** (a random mood each time), **iPhone voice** (Web Speech, as before).
+- Speed (0.7–1.0×) and the 🐢 slow button work on recorded clips too (pitch kept).
+- If a clip is missing, the iPhone voice is used; if neither exists, 🔊 buttons and listening cards stay hidden (as section 9).
+
+### D3. Offline
+- Clips are cached on the device in their own cache, kept across app updates.
+- Clips for started lessons (and every word already introduced) are saved automatically in the background when online; Settings has "Save all voices for offline".

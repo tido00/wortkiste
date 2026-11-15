@@ -202,3 +202,28 @@ export function checkTyped(input, expected) {
   if (best === 0) return { result: 'correct' };
   return best === 1 ? { result: 'almost' } : { result: 'wrong' };
 }
+
+// ---- Recorded audio (SPEC Part D) ----
+// Text cleanup for speech: drop {{ }}, slashes between tiles, and brackets.
+export const speakable = (t) => String(t || '').replace(/\{\{(.+?)\}\}/g, '$1').replace(/\s*\/\s*/g, ' ').replace(/[()]/g, '').replace(/\s+/g, ' ').trim();
+// File name of a recorded clip: audio/<voice>/<audioKey>.mp3
+export const audioKey = (text) => hash(speakable(text));
+// Fixed phrases the app speaks outside cards (voice tests).
+export const UI_PHRASES = ['Guten Morgen! Wie geht es dir?', 'Ich lerne Deutsch.', 'Hallo Saad! Ich bin deine Stimme.'];
+
+// Every German text the app can speak for a note.
+export function audioTexts(note) {
+  const k = note.keys;
+  const out = [];
+  if (note.type === 'c') out.push(parseCloze(note.german).full);
+  else if (note.type === 'o') out.push(orderSentence(note.german));
+  else out.push(note.german);
+  if (k.ex && ['n', 'v', 'w'].includes(note.type)) out.push(k.ex);
+  if (hasPluralCard(note)) out.push(k.pl);
+  if (note.type === 'v') {
+    if (k.du) out.push(`du ${k.du}`);
+    if (k.er) out.push(`er ${k.er}`);
+    if (k.perf) out.push(k.perf);
+  }
+  return [...new Set(out.map(speakable).filter(Boolean))];
+}
