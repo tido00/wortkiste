@@ -1,0 +1,333 @@
+// Wortkiste deck file, format v2 (see SPEC.md section 3)
+// type :: german :: english :: french :: key=value ; key=value
+// Converted from seed-cards-L1-L3.txt (DaF kompakt neu A1, Lektion 1-3 + teacher worksheets) on 2026-11-15
+
+#deck | L1A | 1A Hallo! Begrüßung & sein | 1 | tags=A1,course
+p :: Guten Morgen! :: Good morning! :: Bonjour ! (le matin) :: set=greetings
+p :: Guten Tag! :: Hello! / Good day! :: Bonjour !
+p :: Guten Abend! :: Good evening! :: Bonsoir ! :: set=greetings
+p :: Hallo! :: Hi! :: Salut !
+p :: Tschüss! :: Bye! :: Salut ! (au revoir)
+p :: Auf Wiedersehen! :: Goodbye! (formal) :: Au revoir ! (formel)
+p :: Wie heißt du? :: What's your name? (informal) :: Comment tu t'appelles ? :: set=name-question
+p :: Wie heißen Sie? :: What's your name? (formal) :: Comment vous appelez-vous ? :: set=name-question
+p :: Ich heiße Saad. :: My name is Saad. :: Je m'appelle Saad.
+p :: Woher kommst du? :: Where are you from? (informal) :: D'où viens-tu ? :: set=woher
+p :: Woher kommen Sie? :: Where are you from? (formal) :: D'où venez-vous ? :: set=woher
+p :: Ich komme aus Marokko. :: I come from Morocco. :: Je viens du Maroc.
+p :: Wo wohnst du? :: Where do you live? :: Où habites-tu ?
+p :: Ich wohne in Marrakesch. :: I live in Marrakech. :: J'habite à Marrakech.
+p :: Freut mich! :: Nice to meet you! :: Enchanté !
+p :: Herzlich willkommen! :: Welcome! :: Bienvenue !
+p :: Wie geht's? :: How are you? :: Ça va ?
+p :: Danke, gut. Und dir? :: Fine, thanks. And you? :: Bien, merci. Et toi ?
+p :: Ich bin neu im Deutschkurs. :: I'm new in the German course. :: Je suis nouveau dans le cours d'allemand.
+p :: Ich lerne auch Deutsch. :: I'm learning German too. :: J'apprends aussi l'allemand.
+v :: heißen :: to be called :: s'appeler :: du=heißt ; er=heißt ; ex=Ich heiße Saad.
+v :: kommen (aus) :: to come (from) :: venir (de) :: ex=Ich komme aus Marokko.
+v :: wohnen (in) :: to live (in) :: habiter (à) :: ex=Ich wohne in Marrakesch.
+v :: sein :: to be :: être :: du=bist ; er=ist ; ex=Ich bin Saad.
+w :: auch :: also, too :: aussi :: ex=Ich lerne auch Deutsch.
+w :: neu :: new :: nouveau :: ex=Ich bin neu hier.
+c :: Ich {{bin}} Saad. :: I am Saad. :: Je suis Saad. :: hint=sein
+c :: Du {{bist}} nett. :: You are nice. :: Tu es gentil. :: hint=sein
+c :: Er {{ist}} mein Lehrer. :: He is my teacher. :: C'est mon professeur. :: hint=sein
+c :: Wir {{sind}} neu hier. :: We are new here. :: Nous sommes nouveaux ici. :: hint=sein
+c :: Ihr {{seid}} aus Marokko. :: You (all) are from Morocco. :: Vous êtes du Maroc. :: hint=sein
+c :: Sie {{sind}} aus Berlin. :: They are / You (formal) are from Berlin. :: Ils sont / Vous êtes de Berlin. :: hint=sein
+c :: Malika ist meine Freundin. {{Sie}} kommt aus Rabat. :: Malika is my friend. She comes from Rabat. :: Malika est mon amie. Elle vient de Rabat. :: hint=Malika → ?
+c :: Der Hund ist süß. {{Er}} spielt im Garten. :: The dog is cute. It plays in the garden. :: Le chien est mignon. Il joue dans le jardin. :: hint=der Hund → ? ; tip=der word → er, even for things and animals
+c :: Das Kind ist müde. {{Es}} schläft. :: The child is tired. It's sleeping. :: L'enfant est fatigué. Il dort. :: hint=das Kind → ? ; tip=das word → es
+c :: Tom und Paul lernen Deutsch. {{Sie}} sind Studenten. :: Tom and Paul are learning German. They are students. :: Tom et Paul apprennent l'allemand. Ils sont étudiants. :: hint=two people → ?
+c :: Du und ich lernen zusammen. {{Wir}} machen die Hausaufgabe. :: You and I study together. We do the homework. :: Toi et moi, on apprend ensemble. Nous faisons les devoirs. :: hint=du + ich → ?
+c :: Frau Berger, kommen {{Sie}} aus Berlin? :: Mrs Berger, do you come from Berlin? :: Madame Berger, vous venez de Berlin ? :: hint=formal you ; tip=formal you = Sie, always with a capital S
+o :: Woher / kommen / Sie? :: Where are you from? (formal) :: D'où venez-vous ?
+o :: Ich / wohne / in / Marrakesch. :: I live in Marrakech. :: J'habite à Marrakech.
+
+#deck | L1B | 1B Sprachen & Verben | 2 | tags=A1,course
+v :: lernen :: to learn :: apprendre :: ex=Ich lerne Deutsch.
+v :: sprechen :: to speak :: parler :: du=sprichst ; er=spricht ; ex=Ich spreche Arabisch.
+v :: verstehen :: to understand :: comprendre :: ex=Ich verstehe das nicht.
+v :: studieren :: to study (at university) :: étudier (à l'université) :: ex=Sie studiert in Rabat. ; tip=lernen = learn in general; studieren = study at university
+v :: arbeiten (als) :: to work (as) :: travailler (comme) :: du=arbeitest ; er=arbeitet ; ex=Ich arbeite als Verkäufer.
+v :: machen :: to do / to make :: faire :: ex=Ich mache einen Deutschkurs.
+v :: schreiben :: to write :: écrire :: ex=Ich schreibe meinen Namen.
+v :: fragen :: to ask :: demander :: ex=Ich frage den Lehrer. ; set=ask-answer
+v :: antworten :: to answer :: répondre :: du=antwortest ; er=antwortet ; ex=Bitte antworten Sie. ; set=ask-answer
+v :: buchstabieren :: to spell :: épeler :: ex=Können Sie das buchstabieren?
+v :: hören :: to listen / to hear :: écouter / entendre :: ex=Hören Sie den Dialog.
+v :: lesen :: to read :: lire :: du=liest ; er=liest ; ex=Ich lese ein Buch.
+v :: trinken :: to drink :: boire :: ex=Ich trinke Tee.
+p :: Ich spreche Arabisch, Französisch und Englisch. :: I speak Arabic, French and English. :: Je parle arabe, français et anglais.
+p :: Meine Muttersprache ist Arabisch. :: My mother tongue is Arabic. :: Ma langue maternelle est l'arabe.
+p :: Ich arbeite im Verkauf. :: I work in sales. :: Je travaille dans la vente.
+p :: Sprechen Sie Deutsch? :: Do you speak German? :: Parlez-vous allemand ?
+p :: Ich verstehe das nicht. :: I don't understand. :: Je ne comprends pas.
+p :: Noch einmal, bitte. :: Once more, please. :: Encore une fois, s'il vous plaît.
+n :: die Sprache :: language :: la langue :: pl=die Sprachen ; img=🗣️ ; ex=Deutsch ist eine schöne Sprache.
+n :: die Muttersprache :: mother tongue :: la langue maternelle :: pl=die Muttersprachen ; ex=Meine Muttersprache ist Arabisch.
+n :: das Land :: country :: le pays :: pl=die Länder ; img=🌍 ; ex=Marokko ist ein schönes Land.
+n :: die Stadt :: city :: la ville :: pl=die Städte ; img=🏙️ ; ex=Marrakesch ist eine große Stadt.
+n :: der Kurs :: course :: le cours :: pl=die Kurse ; ex=Der Kurs ist am Abend.
+n :: der Student :: student (m) :: l'étudiant :: pl=die Studenten ; img=🎓 ; set=student
+n :: die Studentin :: student (f) :: l'étudiante :: pl=die Studentinnen ; set=student ; tip=female job/person word ends in -in → die
+n :: der Lehrer :: teacher (m) :: l'enseignant :: pl=die Lehrer ; img=👨‍🏫 ; set=teacher
+n :: die Lehrerin :: teacher (f) :: l'enseignante :: pl=die Lehrerinnen ; img=👩‍🏫 ; set=teacher ; tip=-in → die
+n :: die Universität :: university :: l'université :: pl=die Universitäten ; img=🎓 ; tip=-tät → always die
+n :: die Sprachschule :: language school :: l'école de langues :: pl=die Sprachschulen ; img=🏫 ; ex=Meine Sprachschule ist online.
+n :: der Beruf :: job, profession :: le métier :: pl=die Berufe ; img=💼 ; ex=Was sind Sie von Beruf?
+w :: Deutschland :: Germany :: l'Allemagne :: img=🇩🇪
+w :: Frankreich :: France :: la France :: img=🇫🇷
+w :: Spanien :: Spain :: l'Espagne :: img=🇪🇸
+w :: Marokko :: Morocco :: le Maroc :: img=🇲🇦
+w :: England :: England :: l'Angleterre :: img=🏴󠁧󠁢󠁥󠁮󠁧󠁿
+w :: die Türkei :: Turkey :: la Turquie :: img=🇹🇷 ; tip=a few countries have an article: die Türkei, die Schweiz
+w :: Deutsch :: German (language) :: l'allemand :: ex=Ich lerne Deutsch.
+w :: Französisch :: French (language) :: le français :: ex=Ich spreche Französisch.
+w :: Spanisch :: Spanish (language) :: l'espagnol
+w :: Arabisch :: Arabic (language) :: l'arabe :: ex=Meine Muttersprache ist Arabisch.
+w :: Englisch :: English (language) :: l'anglais
+w :: Türkisch :: Turkish (language) :: le turc
+c :: Ich {{lerne}} Deutsch. :: I learn German. :: J'apprends l'allemand. :: hint=lernen ; tip=ich → -e
+c :: Du {{lernst}} schnell. :: You learn fast. :: Tu apprends vite. :: hint=lernen ; tip=du → -st
+c :: Er {{lernt}} Englisch. :: He learns English. :: Il apprend l'anglais. :: hint=lernen ; tip=er/sie/es → -t
+c :: Wir {{lernen}} zusammen. :: We learn together. :: Nous apprenons ensemble. :: hint=lernen ; tip=wir → -en
+c :: Ihr {{lernt}} viel. :: You (all) learn a lot. :: Vous apprenez beaucoup. :: hint=lernen ; tip=ihr → -t
+c :: Sie {{lernen}} Arabisch. :: They learn Arabic. :: Ils apprennent l'arabe. :: hint=lernen ; tip=sie/Sie → -en
+c :: Du {{arbeitest}} viel. :: You work a lot. :: Tu travailles beaucoup. :: hint=arbeiten ; tip=stem ends in -t → add -e-: du arbeitest
+c :: Er {{arbeitet}} im Verkauf. :: He works in sales. :: Il travaille dans la vente. :: hint=arbeiten ; tip=er arbeitet (extra -e-)
+c :: Du {{heißt}} Saad, oder? :: Your name is Saad, right? :: Tu t'appelles Saad, non ? :: hint=heißen ; tip=stem ends in -ß → du heißt (no extra s)
+c :: Du {{sprichst}} gut Deutsch! :: You speak German well! :: Tu parles bien allemand ! :: hint=sprechen ; tip=sprechen changes e → i: du sprichst, er spricht
+c :: Wo {{wohnst}} du? :: Where do you live? :: Où habites-tu ? :: hint=wohnen ; tip=W-question: W-word, VERB in position 2, then subject
+c :: {{Trinkst}} du Kaffee? :: Do you drink coffee? :: Tu bois du café ? :: hint=trinken ; tip=yes/no question: the VERB goes first
+c :: {{Woher}} kommen Sie? – Aus Marokko. :: Where are you from? – From Morocco. :: D'où venez-vous ? – Du Maroc. :: hint=from where ; set=w-words
+c :: {{Wie}} heißen Sie? – Ich heiße Müller. :: What's your name? – My name is Müller. :: Comment vous appelez-vous ? – Je m'appelle Müller. :: hint=how ; set=w-words
+c :: {{Wo}} wohnst du? – In Marrakesch. :: Where do you live? – In Marrakech. :: Où habites-tu ? – À Marrakech. :: hint=where ; set=w-words
+o :: Wo / wohnst / du? :: Where do you live? :: Où habites-tu ?
+o :: Sprichst / du / Deutsch? :: Do you speak German? :: Tu parles allemand ?
+o :: Ich / arbeite / im / Verkauf. :: I work in sales. :: Je travaille dans la vente.
+
+#deck | L1C | 1C Buchstaben & Zahlen | 3 | tags=A1,course
+w :: null :: 0 :: 0
+w :: eins :: 1 :: 1
+w :: zwei :: 2 :: 2 :: tip=on the phone people often say "zwo" so it isn't confused with drei
+w :: drei :: 3 :: 3
+w :: vier :: 4 :: 4
+w :: fünf :: 5 :: 5
+w :: sechs :: 6 :: 6
+w :: sieben :: 7 :: 7
+w :: acht :: 8 :: 8
+w :: neun :: 9 :: 9
+w :: zehn :: 10 :: 10
+w :: elf :: 11 :: 11
+w :: zwölf :: 12 :: 12
+w :: dreizehn :: 13 :: 13 :: set=13-30 ; tip=13–19 = number + zehn
+w :: vierzehn :: 14 :: 14
+w :: sechzehn :: 16 :: 16 :: set=sechs ; tip=sechs drops the s: sechzehn
+w :: siebzehn :: 17 :: 17 :: set=sieben ; tip=sieben drops -en: siebzehn
+w :: zwanzig :: 20 :: 20
+w :: einundzwanzig :: 21 :: 21 :: tip=said backwards: one-and-twenty (like Arabic wahed w 3ishrin)
+w :: fünfunddreißig :: 35 :: 35 :: tip=five-and-thirty
+w :: dreißig :: 30 :: 30 :: set=13-30 ; tip=30 is written with ß, not z
+w :: vierzig :: 40 :: 40
+w :: sechzig :: 60 :: 60 :: set=sechs
+w :: siebzig :: 70 :: 70 :: set=sieben
+w :: hundert :: 100 :: 100
+w :: tausend :: 1000 :: 1000
+w :: eine Million :: a million :: un million
+w :: eine Milliarde :: a billion :: un milliard :: ff=Milliarde = billion (10⁹), like French milliard
+p :: Wie ist Ihre Telefonnummer? :: What's your phone number? :: Quel est votre numéro de téléphone ?
+p :: Wie ist Ihre Adresse? :: What's your address? :: Quelle est votre adresse ?
+p :: Wie schreibt man das? :: How do you write that? :: Comment ça s'écrit ?
+p :: Können Sie das buchstabieren? :: Can you spell that? :: Pouvez-vous épeler ça ?
+n :: der Name :: name :: le nom :: pl=die Namen ; ex=Mein Name ist Saad. ; set=names
+n :: der Vorname :: first name :: le prénom :: pl=die Vornamen ; ex=Mein Vorname ist Saad. ; set=names
+n :: der Nachname :: last name :: le nom de famille :: pl=die Nachnamen ; set=names
+n :: die Adresse :: address :: l'adresse :: pl=die Adressen ; img=📮
+n :: die Straße :: street :: la rue :: pl=die Straßen ; img=🛣️
+n :: die Hausnummer :: house number :: le numéro de maison :: pl=die Hausnummern
+n :: die Postleitzahl :: postcode :: le code postal :: pl=die Postleitzahlen
+n :: die Telefonnummer :: phone number :: le numéro de téléphone :: pl=die Telefonnummern ; img=☎️ ; set=numbers
+n :: die Handynummer :: mobile number :: le numéro de portable :: pl=die Handynummern ; img=📱 ; set=numbers
+n :: die Nationalität :: nationality :: la nationalité :: pl=die Nationalitäten ; tip=-tät → always die
+n :: die Zahl :: number :: le nombre :: pl=die Zahlen ; img=🔢
+n :: der Buchstabe :: letter (of the alphabet) :: la lettre :: pl=die Buchstaben ; img=🔤
+n :: das Formular :: form :: le formulaire :: pl=die Formulare ; img=📝
+n :: die Frage :: question :: la question :: pl=die Fragen ; img=❓ ; set=q-a
+n :: die Antwort :: answer :: la réponse :: pl=die Antworten ; set=q-a
+n :: das Foto :: photo :: la photo :: pl=die Fotos ; img=🖼️ ; ff=das Foto, but French la photo
+n :: das Gespräch :: conversation :: la conversation :: pl=die Gespräche ; img=💬
+c :: {{Die}} Wohnung ist schön. :: The flat is nice. :: L'appartement est beau. :: hint=-ung → ? ; tip=-ung, -heit, -keit, -ion, -tät → always die
+c :: {{Das}} Mädchen heißt Lina. :: The girl is called Lina. :: La fille s'appelle Lina. :: hint=-chen → ? ; tip=-chen, -lein → always das (even das Mädchen!)
+c :: {{Der}} Montag ist lang. :: Monday is long. :: Le lundi est long. :: hint=days → ? ; tip=days, months, seasons → always der
+c :: Er ist Lehrer, sie ist {{Lehrerin}}. :: He is a teacher, she is a teacher. :: Il est professeur, elle est professeure. :: hint=female form? ; tip=female form = -in, and it takes die
+
+#deck | L2A | 2A Dinge & Artikel (Nom + Akk) | 4 | tags=A1,course
+n :: das Handy :: mobile phone :: le portable :: pl=die Handys ; img=📱 ; ff=Handy is German only; English says mobile/cell phone ; ex=Mein Handy ist neu.
+n :: der Computer :: computer :: l'ordinateur :: pl=die Computer ; img=💻
+n :: das Telefon :: telephone :: le téléphone :: pl=die Telefone ; img=☎️
+n :: das Auto :: car :: la voiture :: pl=die Autos ; img=🚗 ; ex=Ich habe kein Auto.
+n :: das Fahrrad :: bicycle :: le vélo :: pl=die Fahrräder ; img=🚲
+n :: die Uhr :: watch, clock :: la montre / l'horloge :: pl=die Uhren ; img=⌚
+n :: die Kamera :: camera :: l'appareil photo :: pl=die Kameras ; img=📸
+n :: der Fernseher :: TV set :: la télé :: pl=die Fernseher ; img=📺
+n :: die Tasche :: bag :: le sac :: pl=die Taschen ; img=👜
+n :: das Buch :: book :: le livre :: pl=die Bücher ; img=📖 ; ex=Ich lese ein Buch.
+n :: der Stift :: pen :: le stylo :: pl=die Stifte ; img=🖊️
+n :: die Lampe :: lamp :: la lampe :: pl=die Lampen ; img=💡
+n :: der Schlüssel :: key :: la clé :: pl=die Schlüssel ; img=🔑 ; ex=Wo ist mein Schlüssel?
+n :: die Brille :: glasses :: les lunettes :: pl=die Brillen ; img=👓 ; tip=one pair of glasses = eine Brille (singular)
+n :: der Tisch :: table :: la table :: pl=die Tische ; ex=Der Tisch ist neu. ; set=furniture
+n :: der Stuhl :: chair :: la chaise :: pl=die Stühle ; img=🪑 ; set=furniture
+n :: die Wohnung :: flat, apartment :: l'appartement :: pl=die Wohnungen ; img=🏢 ; tip=-ung → die ; ex=Meine Wohnung ist in Marrakesch.
+n :: der Ball :: ball :: le ballon :: pl=die Bälle ; img=⚽
+n :: die Zeitung :: newspaper :: le journal :: pl=die Zeitungen ; img=📰 ; tip=-ung → die
+v :: haben :: to have :: avoir :: du=hast ; er=hat ; ex=Ich habe ein Handy.
+v :: kaufen :: to buy :: acheter :: ex=Wir kaufen ein Auto.
+v :: brauchen :: to need :: avoir besoin de :: ex=Ich brauche einen Stift.
+v :: suchen :: to look for :: chercher :: ex=Ich suche eine Wohnung.
+v :: sehen :: to see :: voir :: du=siehst ; er=sieht ; ex=Ich sehe den Mann.
+w :: früher :: in the past, before :: avant, autrefois :: ex=Früher hatte ich kein Handy.
+w :: heute :: today :: aujourd'hui :: ex=Heute lerne ich Deutsch.
+c :: Ich {{habe}} ein Handy. :: I have a mobile phone. :: J'ai un portable. :: hint=haben
+c :: Du {{hast}} ein Auto. :: You have a car. :: Tu as une voiture. :: hint=haben
+c :: Er {{hat}} eine Schwester. :: He has a sister. :: Il a une sœur. :: hint=haben
+c :: Wir {{haben}} eine Wohnung. :: We have a flat. :: Nous avons un appartement. :: hint=haben
+c :: Ihr {{habt}} einen Lehrer. :: You (all) have a teacher. :: Vous avez un professeur. :: hint=haben
+c :: Sie {{haben}} ein Kind. :: They have a child. :: Ils ont un enfant. :: hint=haben
+c :: Früher {{hatte}} ich kein Handy. :: In the past I didn't have a mobile phone. :: Avant, je n'avais pas de portable. :: hint=haben, past ; tip=past of haben: ich hatte
+c :: {{Der}} Lehrer ist nett. :: The teacher is nice. :: Le professeur est gentil. :: hint=the (subject)
+c :: {{Ein}} Student kommt aus Spanien. :: A student comes from Spain. :: Un étudiant vient d'Espagne. :: hint=a (subject) ; tip=ein = a (der/das words)
+c :: {{Eine}} Lehrerin ist nicht da. :: A teacher isn't here. :: Une professeure n'est pas là. :: hint=a (subject) ; tip=eine = a (die words)
+c :: Ich sehe {{den}} Mann. :: I see the man. :: Je vois l'homme. :: hint=the (object) ; tip=Akkusativ: only der changes! der → den
+c :: Ich trinke {{einen}} Kaffee. :: I drink a coffee. :: Je bois un café. :: hint=a (object) ; tip=der word as object: ein → einen
+c :: Ich brauche {{keinen}} Stift. :: I don't need a pen. :: Je n'ai pas besoin de stylo. :: hint=no / not a ; tip=der word as object: kein → keinen
+c :: Ich suche {{eine}} Tasche. :: I'm looking for a bag. :: Je cherche un sac. :: hint=a (object) ; tip=die words don't change: eine → eine
+c :: Er liest {{das}} Buch. :: He reads the book. :: Il lit le livre. :: hint=the (object) ; tip=das words don't change: das → das
+c :: Wir haben {{keine}} Kinder. :: We have no children. :: Nous n'avons pas d'enfants. :: hint=no (plural) ; tip=plural: keine
+c :: Ich habe ein Auto. {{Das}} Auto ist neu. :: I have a car. The car is new. :: J'ai une voiture. La voiture est neuve. :: hint=the (subject)
+o :: Ich / brauche / einen / Stift. :: I need a pen. :: J'ai besoin d'un stylo.
+o :: Heute / kaufe / ich / ein / Fahrrad. :: Today I'm buying a bike. :: Aujourd'hui, j'achète un vélo. :: alt=Ich / kaufe / heute / ein / Fahrrad. ; tip=the verb is always in position 2, even when the sentence starts with "heute"
+
+#deck | L2B | 2B Familie & Possessivartikel | 5 | tags=A1,course
+n :: der Vater :: father :: le père :: pl=die Väter ; img=👨 ; set=parents
+n :: die Mutter :: mother :: la mère :: pl=die Mütter ; img=👩 ; set=parents
+n :: die Eltern :: parents :: les parents :: pl=only ; ex=Meine Eltern wohnen in Marrakesch.
+n :: der Bruder :: brother :: le frère :: pl=die Brüder ; set=siblings
+n :: die Schwester :: sister :: la sœur :: pl=die Schwestern ; set=siblings
+n :: die Geschwister :: siblings :: les frères et sœurs :: pl=only ; ex=Hast du Geschwister?
+n :: der Sohn :: son :: le fils :: pl=die Söhne ; set=son-daughter
+n :: die Tochter :: daughter :: la fille :: pl=die Töchter ; set=son-daughter
+n :: das Kind :: child :: l'enfant :: pl=die Kinder ; img=🧒
+n :: der Großvater :: grandfather :: le grand-père :: pl=die Großväter ; img=👴 ; set=grandparents
+n :: die Großmutter :: grandmother :: la grand-mère :: pl=die Großmütter ; img=👵 ; set=grandparents
+n :: der Onkel :: uncle :: l'oncle :: pl=die Onkel ; set=uncle-aunt
+n :: die Tante :: aunt :: la tante :: pl=die Tanten ; set=uncle-aunt
+n :: die Familie :: family :: la famille :: pl=die Familien ; img=👨‍👩‍👧 ; ex=Meine Familie ist groß.
+n :: der Mann :: man / husband :: l'homme / le mari :: pl=die Männer ; set=man-woman
+n :: die Frau :: woman / wife / Mrs :: la femme / l'épouse / Madame :: pl=die Frauen ; set=man-woman
+w :: verheiratet :: married :: marié(e) :: ex=Ich bin verheiratet. ; set=status
+w :: ledig :: single :: célibataire :: ex=Ich bin ledig. ; set=status
+p :: Das ist mein Bruder. :: This is my brother. :: C'est mon frère.
+p :: Das ist meine Schwester. :: This is my sister. :: C'est ma sœur.
+p :: Das sind meine Eltern. :: These are my parents. :: Ce sont mes parents.
+p :: Hast du Geschwister? :: Do you have siblings? :: As-tu des frères et sœurs ?
+c :: Das ist {{meine}} Mutter. :: This is my mother. :: C'est ma mère. :: hint=ich → ? ; tip=die words and plural add -e: meine
+c :: Ist das {{dein}} Bruder? :: Is that your brother? :: C'est ton frère ? :: hint=du → ?
+c :: Das ist Karim. Das ist {{seine}} Schwester. :: This is Karim. This is his sister. :: Voici Karim. C'est sa sœur. :: hint=er → ? ; tip=er → sein / seine
+c :: Das ist Malika. Das ist {{ihr}} Bruder. :: This is Malika. This is her brother. :: Voici Malika. C'est son frère. :: hint=sie (she) → ? ; tip=sie → ihr / ihre ; ff=ihr Bruder = HER brother (French says son frère)
+c :: Das ist {{unsere}} Wohnung. :: This is our flat. :: C'est notre appartement. :: hint=wir → ?
+c :: Ist das {{euer}} Lehrer? :: Is that your (all) teacher? :: C'est votre professeur ? :: hint=ihr (you all) → ? ; tip=ihr → euer / eure
+c :: Herr Meier, ist das {{Ihr}} Kind? :: Mr Meier, is that your child? :: Monsieur Meier, c'est votre enfant ? :: hint=Sie (formal) → ? ; tip=formal: Ihr with a capital I
+c :: Herr Meier hat ein Auto. Das ist {{sein}} Auto. :: Mr Meier has a car. That's his car. :: M. Meier a une voiture. C'est sa voiture. :: hint=Herr Meier = er
+c :: Frau Klein hat eine Tasche. Das ist {{ihre}} Tasche. :: Mrs Klein has a bag. That's her bag. :: Mme Klein a un sac. C'est son sac. :: hint=Frau Klein = sie ; tip=die Tasche → ihre (-e)
+c :: Ich habe zwei Brüder. Das sind {{meine}} Brüder. :: I have two brothers. These are my brothers. :: J'ai deux frères. Ce sont mes frères. :: hint=plural
+c :: Ihr habt einen Lehrer. Das ist {{euer}} Lehrer. :: You (all) have a teacher. That's your teacher. :: Vous avez un professeur. C'est votre professeur. :: hint=ihr, der word
+o :: Das / ist / meine / Familie. :: This is my family. :: C'est ma famille.
+o :: Mein / Bruder / wohnt / in / Rabat. :: My brother lives in Rabat. :: Mon frère habite à Rabat.
+
+#deck | L2C | 2C Essen & Konnektoren | 6 | tags=A1,course
+n :: das Brot :: bread :: le pain :: pl=die Brote ; img=🍞
+n :: das Wasser :: water :: l'eau :: pl=- ; img=💧
+n :: der Kaffee :: coffee :: le café :: pl=die Kaffees ; img=☕ ; set=drinks
+n :: der Tee :: tea :: le thé :: pl=die Tees ; img=🍵 ; set=drinks ; ex=Ich trinke Tee mit Minze.
+n :: die Milch :: milk :: le lait :: pl=- ; img=🥛
+n :: der Saft :: juice :: le jus :: pl=die Säfte ; img=🧃
+n :: die Suppe :: soup :: la soupe :: pl=die Suppen ; img=🍲
+n :: der Salat :: salad :: la salade :: pl=die Salate ; img=🥗
+n :: das Fleisch :: meat :: la viande :: pl=- ; img=🥩
+n :: der Fisch :: fish :: le poisson :: pl=die Fische ; img=🐟
+n :: das Hähnchen :: chicken :: le poulet :: pl=die Hähnchen ; img=🍗 ; tip=-chen → das
+n :: die Pizza :: pizza :: la pizza :: pl=die Pizzas ; img=🍕
+n :: der Kuchen :: cake :: le gâteau :: pl=die Kuchen ; img=🍰
+n :: das Ei :: egg :: l'œuf :: pl=die Eier ; img=🥚
+n :: der Käse :: cheese :: le fromage :: pl=die Käse ; img=🧀
+n :: das Obst :: fruit :: les fruits :: pl=- ; img=🍎 ; set=obst-gemuese
+n :: das Gemüse :: vegetables :: les légumes :: pl=- ; img=🥦 ; set=obst-gemuese ; tip=das Gemüse is singular in German
+n :: die Rechnung :: bill :: l'addition :: pl=die Rechnungen ; img=🧾 ; tip=-ung → die
+n :: die Speisekarte :: menu :: le menu / la carte :: pl=die Speisekarten ; ff=das Menü = a set meal; the menu card = die Speisekarte
+n :: das Restaurant :: restaurant :: le restaurant :: pl=die Restaurants ; img=🍽️
+v :: essen :: to eat :: manger :: du=isst ; er=isst ; ex=Ich esse einen Salat.
+v :: nehmen :: to take / to have (food) :: prendre :: du=nimmst ; er=nimmt ; ex=Ich nehme die Suppe.
+v :: möchten :: would like :: voudrais :: du=möchtest ; er=möchte ; ex=Ich möchte einen Tee. ; tip=er möchte (no -t!)
+v :: bezahlen :: to pay :: payer :: ex=Ich möchte bezahlen.
+p :: Ich möchte einen Kaffee, bitte. :: I'd like a coffee, please. :: Je voudrais un café, s'il vous plaît.
+p :: Was möchten Sie trinken? :: What would you like to drink? :: Que voulez-vous boire ?
+p :: Ich nehme die Suppe. :: I'll have the soup. :: Je prends la soupe.
+p :: Die Rechnung, bitte. :: The bill, please. :: L'addition, s'il vous plaît.
+p :: Zusammen oder getrennt? :: Together or separately? :: Ensemble ou séparément ?
+p :: Das macht zwölf Euro. :: That's twelve euros. :: Ça fait douze euros.
+p :: Guten Appetit! :: Enjoy your meal! :: Bon appétit !
+c :: Ich bin müde, {{aber}} ich arbeite noch. :: I'm tired, but I'm still working. :: Je suis fatigué, mais je travaille encore. :: hint=but ; set=connectors
+c :: Möchtest du Kaffee {{oder}} Tee? :: Would you like coffee or tea? :: Tu veux du café ou du thé ? :: hint=or ; set=connectors
+c :: Ich lerne Deutsch {{und}} Englisch. :: I learn German and English. :: J'apprends l'allemand et l'anglais. :: hint=and
+c :: {{Wer}} ist das? – Das ist mein Bruder. :: Who is that? – That's my brother. :: Qui est-ce ? – C'est mon frère. :: hint=who ; set=w-words
+c :: {{Was}} trinkst du? – Kaffee. :: What are you drinking? – Coffee. :: Qu'est-ce que tu bois ? – Du café. :: hint=what ; set=w-words
+c :: {{Wen}} siehst du? – Den Lehrer. :: Whom do you see? – The teacher. :: Qui vois-tu ? – Le professeur. :: hint=whom (object) ; tip=wen = Akkusativ of wer ; set=w-words
+c :: {{Wann}} hast du Zeit? – Am Montag. :: When are you free? – On Monday. :: Quand as-tu le temps ? – Lundi. :: hint=when ; set=w-words ; ff=wann = when; wenn is different
+o :: Ich / bin / müde, / aber / ich / arbeite / noch. :: I'm tired, but I'm still working. :: Je suis fatigué, mais je travaille encore. :: tip=und / aber / oder don't change the word order: subject, then verb
+o :: Ich / nehme / den / Salat / und / ein / Wasser. :: I'll have the salad and a water. :: Je prends la salade et une eau.
+
+#deck | L3A | 3A Uhrzeit & Termine | 7 | tags=A1,course
+w :: der Montag :: Monday :: lundi :: set=weekdays ; tip=days are always der
+w :: der Dienstag :: Tuesday :: mardi :: set=weekdays
+w :: der Mittwoch :: Wednesday :: mercredi :: set=weekdays ; tip=Mittwoch = mid-week
+w :: der Donnerstag :: Thursday :: jeudi :: set=weekdays ; tip=Donner = thunder (Thor's day)
+w :: der Freitag :: Friday :: vendredi :: set=weekdays
+w :: der Samstag :: Saturday :: samedi :: set=weekdays
+w :: der Sonntag :: Sunday :: dimanche :: set=weekdays ; tip=Sonne = sun
+w :: morgens :: in the morning :: le matin :: set=daytime
+w :: vormittags :: in the late morning :: dans la matinée :: set=daytime
+w :: mittags :: at noon :: à midi :: set=daytime
+w :: nachmittags :: in the afternoon :: l'après-midi :: set=daytime
+w :: abends :: in the evening :: le soir :: set=daytime ; ex=Ich arbeite abends.
+w :: nachts :: at night :: la nuit :: set=daytime
+w :: morgen :: tomorrow :: demain :: set=daytime ; ff=morgen = tomorrow, but morgens = in the morning ; ex=Morgen habe ich Zeit.
+p :: Wie spät ist es? :: What time is it? :: Quelle heure est-il ?
+p :: Wann beginnt der Kurs? :: When does the course start? :: Quand commence le cours ?
+p :: Um acht Uhr. :: At eight o'clock. :: À huit heures.
+p :: Hast du am Montag Zeit? :: Are you free on Monday? :: Tu as du temps lundi ?
+p :: Tut mir leid, ich habe keine Zeit. :: Sorry, I don't have time. :: Désolé, je n'ai pas le temps.
+c :: Es ist {{acht}} Uhr. :: It's eight o'clock. :: Il est huit heures. :: hint=20:00 ; tip=everyday speech: acht Uhr; official: zwanzig Uhr
+c :: Es ist {{Viertel}} nach acht. :: It's quarter past eight. :: Il est huit heures et quart. :: hint=20:15 ; tip=Viertel nach = quarter past
+c :: Es ist {{halb}} neun. :: It's half past eight. :: Il est huit heures et demie. :: hint=20:30 ; tip=halb neun = half TO nine (halfway to 9)! ; ff=halb neun is 8:30, not 9:30
+c :: Es ist Viertel {{vor}} neun. :: It's quarter to nine. :: Il est neuf heures moins le quart. :: hint=20:45 ; tip=vor = to / before
+c :: Es ist fünf vor {{halb}} neun. :: It's 8:25. :: Il est huit heures vingt-cinq. :: hint=20:25 ; tip=5 minutes before half-nine
+c :: Es ist fünf nach {{halb}} neun. :: It's 8:35. :: Il est huit heures trente-cinq. :: hint=20:35 ; tip=5 minutes after half-nine
+c :: Es ist zwanzig {{vor}} neun. :: It's twenty to nine. :: Il est neuf heures moins vingt. :: hint=20:40
+c :: Der Zug kommt um zwanzig Uhr {{fünfzehn}}. :: The train arrives at 20:15. :: Le train arrive à 20 h 15. :: hint=20:15, official time ; tip=official time (trains, TV): just read the numbers
+c :: Der Lehrer fragt {{mich}}. :: The teacher asks me. :: Le professeur me demande. :: hint=ich → ?
+c :: Ich sehe {{dich}}. :: I see you. :: Je te vois. :: hint=du → ?
+c :: Das ist Mohamed. Ich kenne {{ihn}}. :: This is Mohamed. I know him. :: Voici Mohamed. Je le connais. :: hint=er → ? ; tip=er → ihn (like der → den)
+c :: Malika ist krank. Wir besuchen {{sie}}. :: Malika is sick. We visit her. :: Malika est malade. Nous lui rendons visite. :: hint=sie → ? ; tip=sie stays sie
+c :: Das Auto ist schön. Ich kaufe {{es}}. :: The car is nice. I'm buying it. :: La voiture est belle. Je l'achète. :: hint=es → ? ; tip=es stays es
+c :: Er trifft {{uns}} heute. :: He's meeting us today. :: Il nous rencontre aujourd'hui. :: hint=wir → ?
+c :: Ich höre {{euch}}. :: I hear you (all). :: Je vous entends. :: hint=ihr → ?
+c :: Herr Direktor, wir besuchen {{Sie}} morgen. :: Director, we'll visit you tomorrow. :: Monsieur le directeur, nous vous rendons visite demain. :: hint=Sie → ? ; tip=Sie stays Sie
+c :: Ich kaufe den Apfel. Ich kaufe {{ihn}}. :: I buy the apple. I buy it. :: J'achète la pomme. Je l'achète. :: hint=den Apfel → ? ; tip=der word as object → ihn, even for things ; ff=der Apfel (m) but la pomme (f)
+c :: Wir besuchen die Oma. Wir besuchen {{sie}}. :: We visit grandma. We visit her. :: Nous rendons visite à mamie. Nous lui rendons visite. :: hint=die Oma → ?
+c :: Ich treffe meine Freunde. Ich treffe {{sie}}. :: I meet my friends. I meet them. :: Je retrouve mes amis. Je les retrouve. :: hint=plural → ?
+c :: Gestern {{war}} ich müde. :: Yesterday I was tired. :: Hier, j'étais fatigué. :: hint=sein, past ; tip=past of sein: ich war, du warst, er war
+c :: Wir {{waren}} in Berlin. :: We were in Berlin. :: Nous étions à Berlin. :: hint=sein, past ; tip=wir waren, ihr wart, sie waren
+o :: Der / Kurs / beginnt / um / acht / Uhr. :: The course starts at eight o'clock. :: Le cours commence à huit heures. :: alt=Um / acht / Uhr / beginnt / der / Kurs.
+o :: Am / Montag / habe / ich / keine / Zeit. :: On Monday I don't have time. :: Lundi, je n'ai pas le temps. :: alt=Ich / habe / am / Montag / keine / Zeit.
